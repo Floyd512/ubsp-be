@@ -19,6 +19,7 @@
         <module>common</module>
         <module>start</module>
         <module>system</module>
+        <module>data-integration</module>
     </modules>
 
 

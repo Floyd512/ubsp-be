@@ -11,8 +11,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication
 @EnableScheduling
-public class AdminWebApplication {
+public class BdspApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AdminWebApplication.class, args);
+        SpringApplication.run(BdspApplication.class, args);
     }
 }
