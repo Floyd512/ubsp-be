@@ -2,4 +2,24 @@
 
 spring:
   application:
-    name:
+    name: bdsp-be-home
+    
+  # 数据库配置 (家庭电脑的虚拟机地址)
+  datasource:
+    url: jdbc:mysql://192.168.1.4:3306/bdsp?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
+    username: root
+    password: rootTsk@123
+    
+  # Redis配置  
+  data:
+    redis:
+      host: 192.168.1.4
+      port: 6379
+      database: 0
+      password: # 如果有密码则填写
+
+# 日志配置
+logging:
+  level:
+    com.udan.bdsp: debug
+    root: info

@@ -1,1 +1,25 @@
 # work computer 配置
+
+spring:
+  application:
+    name: bdsp-be-work
+    
+  # 数据库配置 (工作电脑的虚拟机地址)
+  datasource:
+    url: jdbc:mysql://10.0.2.15:3306/bdsp?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
+    username: root
+    password: 123456
+    
+  # Redis配置  
+  data:
+    redis:
+      host: 10.0.2.15
+      port: 6379
+      database: 0
+      password: # 如果有密码则填写
+
+# 日志配置
+logging:
+  level:
+    com.udan.bdsp: debug
+    root: info
