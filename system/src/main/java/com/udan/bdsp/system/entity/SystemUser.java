@@ -63,9 +63,9 @@ public class SystemUser extends BaseEntity {
     /**
      * 状态(0:禁用,1:启用)
      */
-    @TableField("status")
+    @TableField("account_status")
     @Schema(description = "状态", example = "1", allowableValues = {"0", "1"})
-    private UserStatus status;
+    private UserStatus accountStatus;
 
     /**
      * 最后登录时间
