@@ -3,6 +3,7 @@ package com.udan.bdsp.common.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @Author TOM FORD
  * @Date 2025-07-03 20:37:14
  */
+@Data
 public class BaseEntity implements Serializable {
 
     @Schema(description = "主键")
