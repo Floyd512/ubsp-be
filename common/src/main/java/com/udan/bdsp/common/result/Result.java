@@ -3,119 +3,96 @@ package com.udan.bdsp.common.result;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.io.Serial;
-import java.io.Serializable;
-
 /**
  * @Description 通用响应结果类
  * @Author TOM FORD
- * @Date 2025-01-21 10:00:00
+ * @Date 2025-07-03 10:00:00
  */
 @Data
 @Schema(description = "响应结果")
-public class Result<T> implements Serializable {
+public class Result<T> {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+    // 返回码，例如 200 表示成功，500 表示失败等
+    private Integer code;
 
-    /**
-     * 成功状态码
-     */
-    public static final int SUCCESS_CODE = 200;
-
-    /**
-     * 失败状态码
-     */
-    public static final int ERROR_CODE = 500;
-
-    /**
-     * 状态码
-     */
-    @Schema(description = "状态码", example = "200")
-    private int code;
-
-    /**
-     * 响应消息
-     */
-    @Schema(description = "响应消息", example = "操作成功")
+    // 返回消息，例如 "成功"、"参数错误" 等
     private String message;
 
-    /**
-     * 响应数据
-     */
-    @Schema(description = "响应数据")
+    // 返回的数据内容，类型为泛型 T，可支持任意对象类型
     private T data;
 
     /**
-     * 时间戳
+     * 空构造方法，默认提供，便于序列化和反序列化
      */
-    @Schema(description = "时间戳")
-    private long timestamp;
-
     public Result() {
-        this.timestamp = System.currentTimeMillis();
-    }
-
-    public Result(int code, String message, T data) {
-        this.code = code;
-        this.message = message;
-        this.data = data;
-        this.timestamp = System.currentTimeMillis();
     }
 
     /**
-     * 成功响应
+     * 内部构建方法，仅设置 data 字段
+     *
+     * @param data 响应中要返回的数据
+     * @return 一个初始化了 data 字段的 Result 对象
      */
-    public static <T> Result<T> success() {
-        return new Result<>(SUCCESS_CODE, "操作成功", null);
+    private static <T> Result<T> build(T data) {
+        Result<T> result = new Result<T>();
+        if (data != null)
+            result.setData(data);
+        return result;
     }
 
     /**
-     * 成功响应
+     * 构建完整的 Result 响应对象（包含 code、message、data）
+     *
+     * @param body     响应数据内容
+     * @param codeEnum 枚举类中定义的状态码与提示信息
+     * @return 构建完成的 Result 对象
      */
-    public static <T> Result<T> success(T data) {
-        return new Result<>(SUCCESS_CODE, "操作成功", data);
+    public static <T> Result<T> build(T body, ResultCodeEnum codeEnum) {
+        Result<T> result = build(body);
+        result.setCode(codeEnum.getCode());
+        result.setMessage(codeEnum.getMessage());
+        return result;
     }
 
     /**
-     * 成功响应
+     * 返回一个成功的响应（带有数据）
+     *
+     * @param data 要返回的数据
+     * @return 包含成功状态码与数据的 Result 对象
      */
-    public static <T> Result<T> success(String message, T data) {
-        return new Result<>(SUCCESS_CODE, message, data);
+    public static <T> Result<T> ok(T data) {
+        return build(data, ResultCodeEnum.COMMON_SUCCESS);
     }
 
     /**
-     * 失败响应
+     * 返回一个成功的响应（无数据）
+     *
+     * @return 仅包含成功状态码的 Result 对象
      */
-    public static <T> Result<T> error() {
-        return new Result<>(ERROR_CODE, "操作失败", null);
+    public static <T> Result<T> ok() {
+        return Result.ok(null);
     }
 
     /**
-     * 失败响应
+     * 返回一个通用的失败响应（无数据）
+     *
+     * @return 包含失败状态码的 Result 对象
      */
-    public static <T> Result<T> error(String message) {
-        return new Result<>(ERROR_CODE, message, null);
+    public static <T> Result<T> fail() {
+        return build(null, ResultCodeEnum.COMMON_FAIL);
     }
 
     /**
-     * 失败响应
+     * 自定义失败响应（用于需要手动指定状态码和提示信息的场景）
+     *
+     * @param code    自定义的错误码
+     * @param message 自定义的错误提示
+     * @return 包含自定义错误信息的 Result 对象
      */
-    public static <T> Result<T> error(int code, String message) {
-        return new Result<>(code, message, null);
+    public static <T> Result<T> fail(Integer code, String message) {
+        Result<T> result = build(null);
+        result.setCode(code);
+        result.setMessage(message);
+        return result;
     }
-
-    /**
-     * 自定义响应
-     */
-    public static <T> Result<T> build(int code, String message, T data) {
-        return new Result<>(code, message, data);
-    }
-
-    /**
-     * 判断是否成功
-     */
-    public boolean isSuccess() {
-        return this.code == SUCCESS_CODE;
-    }
-} 
+}

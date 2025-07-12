@@ -2,15 +2,26 @@ package com.udan.bdsp.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.udan.bdsp.system.entity.SystemUser;
+import com.udan.bdsp.system.vo.SystemUserItemVo;
 
 import java.util.List;
 
 /**
- * @Description 系统用户服务接口
+ * @Description 针对表【sys_user(员工信息表)】的数据库操作Service
  * @Author TOM FORD
  * @Date 2025-01-21 10:00:00
  */
 public interface SystemUserService extends IService<SystemUser> {
+
+
+    /**
+     * 根据ID查询用户基本信息及部门信息
+     * @param id id
+     * @return SystemUserItemVo
+     */
+    SystemUserItemVo getInfoWithDepById(Long id);
+
+
 
     /**
      * 根据用户名查找用户
@@ -61,36 +72,6 @@ public interface SystemUserService extends IService<SystemUser> {
      */
     boolean deleteUsers(List<Long> userIds);
 
-    /**
-     * 分配用户角色
-     * @param userId 用户ID
-     * @param roleIds 角色ID列表
-     * @return 分配结果
-     */
-    boolean assignUserRoles(Long userId, List<Long> roleIds);
-
-    /**
-     * 根据用户ID查询角色ID列表
-     * @param userId 用户ID
-     * @return 角色ID列表
-     */
-    List<Long> findRoleIdsByUserId(Long userId);
-
-    /**
-     * 检查用户名是否存在
-     * @param username 用户名
-     * @param excludeId 排除的用户ID
-     * @return 是否存在
-     */
-    boolean checkUsernameExists(String username, Long excludeId);
-
-    /**
-     * 检查邮箱是否存在
-     * @param email 邮箱
-     * @param excludeId 排除的用户ID
-     * @return 是否存在
-     */
-    boolean checkEmailExists(String email, Long excludeId);
 
     /**
      * 重置用户密码
@@ -107,4 +88,4 @@ public interface SystemUserService extends IService<SystemUser> {
      * @return 更新结果
      */
     boolean updateUserStatus(Long userId, Integer status);
-} 
+}

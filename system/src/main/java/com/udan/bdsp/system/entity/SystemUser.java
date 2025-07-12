@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_user")
-@Schema(description = "用户信息")
+@Schema(description = "用户实体")
 public class SystemUser extends BaseEntity {
 
     @Serial
@@ -35,9 +35,16 @@ public class SystemUser extends BaseEntity {
     /**
      * 密码(加密)
      */
-    @TableField("password")
+    @TableField(value = "password", select = false)
     @Schema(description = "密码(加密)", example = "$2a$10$...")
     private String password;
+
+    /**
+     * 真实姓名
+     */
+    @TableField("real_name")
+    @Schema(description = "真实姓名", example = "TOM FORD")
+    private String realName;
 
     /**
      * 邮箱
@@ -73,4 +80,19 @@ public class SystemUser extends BaseEntity {
     @TableField("last_login_time")
     @Schema(description = "最后登录时间")
     private LocalDateTime lastLoginTime;
+
+
+    /**
+     * 最后登录IP
+     */
+    @TableField("last_login_ip")
+    @Schema(description = "最后登录IP")
+    private String lastLoginIp;
+
+    /**
+     * 备注
+     */
+    @TableField("remark")
+    @Schema(description = "备注")
+    private String remark;
 }

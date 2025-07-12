@@ -1,5 +1,7 @@
 package com.udan.bdsp.system.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.udan.bdsp.common.enums.BaseEnum;
 
 /**
@@ -14,6 +16,8 @@ public enum UserStatus implements BaseEnum {
     DISABLE(0, "禁用");
 
 
+    @EnumValue
+    @JsonValue
     private final Integer code;
 
     private final String name;
