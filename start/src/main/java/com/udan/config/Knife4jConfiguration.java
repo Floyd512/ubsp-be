@@ -1,9 +1,12 @@
 package com.udan.config;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +16,6 @@ import org.springframework.context.annotation.Configuration;
  * 配置位置：start模块，统一管理所有模块的API文档
  * <p>
  * 访问地址：<a href="http://localhost:8080/doc.html">接口文档 API</a>
- *
  * @Author TOM FORD
  * @Date 2025-07-01 20:37:10
  */
@@ -36,7 +38,15 @@ public class Knife4jConfiguration {
                                 .email("bdsp@udantech.com"))
                         .license(new License()
                                 .name("MIT License")
-                                .url("https://opensource.org/licenses/MIT")));
+                                .url("https://opensource.org/licenses/MIT")))
+                .addSecurityItem(new SecurityRequirement().addList("Authorization"))
+                .components(new Components().addSecuritySchemes("Authorization",
+                        new SecurityScheme()
+                                .name("Authorization")
+                                .type(SecurityScheme.Type.APIKEY)
+                                .in(SecurityScheme.In.HEADER)
+                                .description("请输入token")
+                ));
     }
 
     /**
