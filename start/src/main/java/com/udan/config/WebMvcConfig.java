@@ -26,4 +26,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
                     "/api/system/captcha"
                 ); // 登录、验证码接口放行
     }
-} 
+}
