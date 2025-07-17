@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>com.udan</groupId>
-            <artifactId>data-integration</artifactId>
+            <artifactId>integration</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

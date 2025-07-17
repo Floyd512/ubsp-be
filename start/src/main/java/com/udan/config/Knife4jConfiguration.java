@@ -99,8 +99,8 @@ public class Knife4jConfiguration {
     @Bean
     public GroupedOpenApi platformServiceApi() {
         return GroupedOpenApi.builder()
-                .group("05-平台服务")
-                .pathsToMatch("/api/platform/**")
+                .group("05-数据服务")
+                .pathsToMatch("/api/service/**")
                 .build();
     }
 }

@@ -1,7 +1,7 @@
 package com.udan.bdsp.system.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.udan.bdsp.system.entity.SystemUser;
+import com.udan.bdsp.system.entity.SystemUserEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "用户基本信息VO")
-public class SystemUserItemVo extends SystemUser {
+public class SystemUserItemVo extends SystemUserEntity {
 
     @Schema(description = "部门名称")
     @TableField(value = "department_name")

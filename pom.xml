@@ -19,7 +19,7 @@
         <module>common</module>
         <module>start</module>
         <module>system</module>
-        <module>data-integration</module>
+        <module>integration</module>
     </modules>
 
 
@@ -91,6 +91,12 @@
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>2.0.52</version>
             </dependency>
 
         </dependencies>

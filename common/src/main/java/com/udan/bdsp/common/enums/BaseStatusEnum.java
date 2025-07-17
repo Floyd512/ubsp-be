@@ -1,15 +1,14 @@
-package com.udan.bdsp.system.enums;
+package com.udan.bdsp.common.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.udan.bdsp.common.enums.BaseEnum;
 
 /**
  * @Description 状态枚举
  * @Author TOM FORD
  * @Date 2025-07-03 20:31:21
  */
-public enum UserStatus implements BaseEnum {
+public enum BaseStatusEnum implements BaseEnum {
 
     ENABLE(1, "正常"),
 
@@ -22,7 +21,7 @@ public enum UserStatus implements BaseEnum {
 
     private final String name;
 
-    UserStatus(Integer code, String name) {
+    BaseStatusEnum(Integer code, String name) {
         this.code = code;
         this.name = name;
     }

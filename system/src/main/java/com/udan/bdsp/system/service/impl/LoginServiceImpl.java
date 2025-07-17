@@ -5,8 +5,8 @@ import com.udan.bdsp.common.exception.LeaseException;
 import com.udan.bdsp.common.result.ResultCodeEnum;
 import com.udan.bdsp.common.utils.JwtUtil;
 import com.udan.bdsp.system.dto.LoginDTO;
-import com.udan.bdsp.system.entity.SystemUser;
-import com.udan.bdsp.system.enums.UserStatus;
+import com.udan.bdsp.system.entity.SystemUserEntity;
+import com.udan.bdsp.common.enums.BaseStatusEnum;
 import com.udan.bdsp.system.mapper.SystemUserMapper;
 import com.udan.bdsp.system.service.LoginService;
 import com.udan.bdsp.system.vo.CaptchaVo;
@@ -58,21 +58,21 @@ public class LoginServiceImpl implements LoginService {
             throw new LeaseException(ResultCodeEnum.ADMIN_CAPTCHA_CODE_ERROR);
         }
 
-        SystemUser systemUser = systemUserMapper.selectOneByUsername(loginDTO.getUsername());
+        SystemUserEntity systemUserEntity = systemUserMapper.selectOneByUsername(loginDTO.getUsername());
 
-        if (systemUser == null) {
+        if (systemUserEntity == null) {
             throw new LeaseException(ResultCodeEnum.ADMIN_ACCOUNT_NOT_EXIST_ERROR);
         }
 
-        if (systemUser.getAccountStatus() == UserStatus.DISABLE) {
+        if (systemUserEntity.getAccountStatus() == BaseStatusEnum.DISABLE) {
             throw new LeaseException(ResultCodeEnum.ADMIN_ACCOUNT_DISABLED_ERROR);
         }
 
-        if (!systemUser.getPassword().equals(DigestUtils.md5Hex(loginDTO.getPassword()))) {
+        if (!systemUserEntity.getPassword().equals(DigestUtils.md5Hex(loginDTO.getPassword()))) {
             throw new LeaseException(ResultCodeEnum.ADMIN_ACCOUNT_ERROR);
         }
 
         //创建JWT
-        return JwtUtil.createToken(systemUser.getId(), systemUser.getUsername());
+        return JwtUtil.createToken(systemUserEntity.getId(), systemUserEntity.getUsername());
     }
 }

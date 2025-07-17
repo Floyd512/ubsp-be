@@ -1,7 +1,7 @@
 package com.udan.bdsp.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.udan.bdsp.system.entity.SystemUser;
+import com.udan.bdsp.system.entity.SystemUserEntity;
 import com.udan.bdsp.system.vo.SystemUserItemVo;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * @Author TOM FORD
  * @Date 2025-01-21 10:00:00
  */
-public interface SystemUserService extends IService<SystemUser> {
+public interface SystemUserService extends IService<SystemUserEntity> {
 
 
     /**
@@ -28,7 +28,7 @@ public interface SystemUserService extends IService<SystemUser> {
      * @param username 用户名
      * @return 用户信息
      */
-    SystemUser findByUsername(String username);
+    SystemUserEntity findByUsername(String username);
 
     /**
      * 根据用户ID查询用户角色
@@ -49,14 +49,14 @@ public interface SystemUserService extends IService<SystemUser> {
      * @param user 用户信息
      * @return 创建结果
      */
-    boolean createUser(SystemUser user);
+    boolean createUser(SystemUserEntity user);
 
     /**
      * 更新用户信息
      * @param user 用户信息
      * @return 更新结果
      */
-    boolean updateUser(SystemUser user);
+    boolean updateUser(SystemUserEntity user);
 
     /**
      * 删除用户

@@ -1,7 +1,7 @@
 package com.udan.bdsp.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.udan.bdsp.system.entity.SystemUser;
+import com.udan.bdsp.system.entity.SystemUserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,8 +10,8 @@ import org.apache.ibatis.annotations.Mapper;
  * @Date 2025-01-21 10:00:00
  */
 @Mapper
-public interface SystemUserMapper extends BaseMapper<SystemUser> {
+public interface SystemUserMapper extends BaseMapper<SystemUserEntity> {
 
 
-    SystemUser selectOneByUsername(String username);
+    SystemUserEntity selectOneByUsername(String username);
 }

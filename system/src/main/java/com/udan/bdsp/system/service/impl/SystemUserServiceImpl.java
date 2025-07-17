@@ -1,7 +1,7 @@
 package com.udan.bdsp.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.udan.bdsp.system.entity.SystemUser;
+import com.udan.bdsp.system.entity.SystemUserEntity;
 import com.udan.bdsp.system.mapper.SystemUserMapper;
 import com.udan.bdsp.system.service.SystemUserService;
 import com.udan.bdsp.system.vo.SystemUserItemVo;
@@ -17,23 +17,23 @@ import java.util.List;
  * @Date 2025-07-12 17:07:15
  */
 @Service
-public class SystemUserServiceImpl extends ServiceImpl<SystemUserMapper, SystemUser> implements SystemUserService {
+public class SystemUserServiceImpl extends ServiceImpl<SystemUserMapper, SystemUserEntity> implements SystemUserService {
 
     @Autowired
     private SystemUserMapper systemUserMapper;
 
     @Override
     public SystemUserItemVo getInfoWithDepById(Long id) {
-        SystemUser systemUser = systemUserMapper.selectById(id);
+        SystemUserEntity systemUserEntity = systemUserMapper.selectById(id);
 
         SystemUserItemVo userItemVo = new SystemUserItemVo();
-        BeanUtils.copyProperties(systemUser, userItemVo);
+        BeanUtils.copyProperties(systemUserEntity, userItemVo);
         userItemVo.setDepartmentName("产品研发部");
         return userItemVo;
     }
 
     @Override
-    public SystemUser findByUsername(String username) {
+    public SystemUserEntity findByUsername(String username) {
         return null;
     }
 
@@ -48,12 +48,12 @@ public class SystemUserServiceImpl extends ServiceImpl<SystemUserMapper, SystemU
     }
 
     @Override
-    public boolean createUser(SystemUser user) {
+    public boolean createUser(SystemUserEntity user) {
         return false;
     }
 
     @Override
-    public boolean updateUser(SystemUser user) {
+    public boolean updateUser(SystemUserEntity user) {
         return false;
     }
 
