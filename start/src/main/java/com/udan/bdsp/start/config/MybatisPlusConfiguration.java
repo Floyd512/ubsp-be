@@ -1,4 +1,4 @@
-package com.udan.config;
+package com.udan.bdsp.start.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;

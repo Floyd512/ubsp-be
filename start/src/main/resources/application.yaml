@@ -7,7 +7,7 @@ spring:
   # 激活的环境配置文件 (根据不同电脑修改此处)
   profiles:
     active: dev_work  # 可选: dev_home, dev_work, prod
-    
+
   # 数据源配置 - 移动到各环境配置文件中
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
@@ -19,7 +19,7 @@ spring:
       maximum-pool-size: 12 #连接池最大连接数，默认是10
       minimum-idle: 10 #最小空闲连接数量
       pool-name: BDSPHikariPool # 连接池名称
-      
+
   jackson:
     time-zone: GMT+8
 
@@ -27,3 +27,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+springdoc:
+  default-flat-param-object: true

@@ -46,15 +46,11 @@ public class SyncDataSourceEntity extends BaseEntity {
     @Schema(description = "端口号", example = "3306")
     private Integer port;
 
-    @TableField("database_name")
-    @Schema(description = "数据库名称", example = "udan")
-    private String databaseName;
-
     @TableField("username")
     @Schema(description = "用户名", example = "root")
     private String username;
 
-    @TableField("password")
+    @TableField(value = "password" , select = false)
     @Schema(description = "密码(A加密)", example = "e10adc3949ba59abbe56e057f20f883")
     private String password;
 
@@ -70,11 +66,11 @@ public class SyncDataSourceEntity extends BaseEntity {
     @Schema(description = "状态", example = "1", allowableValues = {"0", "1"})
     private BaseStatusEnum status;
 
-    @TableField("created_by")
+    @TableField("created_id")
     @Schema(description = "创建人ID", example = "001")
-    private Long createdBy;
+    private Long createdId;
 
-    @TableField("updated_by")
+    @TableField("updated_id")
     @Schema(description = "更新人ID", example = "001")
-    private Long updatedBy;
+    private Long updatedId;
 }

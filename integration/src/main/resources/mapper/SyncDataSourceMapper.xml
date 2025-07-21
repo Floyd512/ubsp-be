@@ -4,4 +4,40 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.udan.bdsp.integration.mapper.SyncDataSourceMapper">
 
+    <select id="pageDataSourceInfo" resultType="com.udan.bdsp.integration.vo.SyncDataSourceInfoVO">
+        SELECT sds.id,
+               sds.datasource_name,
+               sds.datasource_code,
+               sds.datasource_type,
+               sds.host,
+               sds.port,
+               sds.username,
+               sds.password,
+               sds.connection_params,
+               sds.description,
+               sds.status,
+               sds.created_id,
+               sds.updated_id,
+               su_create.username AS createdByName,
+               su_update.username AS updatedByName,
+               sds.create_time,
+               sds.update_time
+        FROM bdsp_sync_datasource sds
+                 LEFT JOIN sys_user su_create
+                           ON sds.created_id = su_create.id AND su_create.is_deleted = 0
+                 LEFT JOIN sys_user su_update
+                           ON sds.updated_id = su_update.id AND su_update.is_deleted = 0
+        <where>
+            sds.is_deleted = 0
+            <if test="queryDTO.dataSourceName != null and queryDTO.dataSourceName != ''">
+                AND sds.datasource_name LIKE CONCAT('%', #{queryDTO.dataSourceName}, '%')
+            </if>
+            <if test="queryDTO.datasourceType != null">
+                AND sds.datasource_type = #{queryDTO.datasourceType}
+            </if>
+            <if test="queryDTO.status != null">
+                AND sds.status = #{queryDTO.status}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.udan.bdsp.system.entity.SystemUserEntity;
 import com.udan.bdsp.system.mapper.SystemUserMapper;
 import com.udan.bdsp.system.service.SystemUserService;
+
 import com.udan.bdsp.system.vo.SystemUserItemVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 /**
  * @Description 针对表【system_user(员工信息表)】的数据库操作Service实现
@@ -33,47 +33,7 @@ public class SystemUserServiceImpl extends ServiceImpl<SystemUserMapper, SystemU
     }
 
     @Override
-    public SystemUserEntity findByUsername(String username) {
-        return null;
-    }
-
-    @Override
-    public List<String> findRolesByUserId(Long userId) {
-        return List.of();
-    }
-
-    @Override
-    public List<String> findPermissionsByUserId(Long userId) {
-        return List.of();
-    }
-
-    @Override
-    public boolean createUser(SystemUserEntity user) {
-        return false;
-    }
-
-    @Override
-    public boolean updateUser(SystemUserEntity user) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteUser(Long userId) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteUsers(List<Long> userIds) {
-        return false;
-    }
-
-    @Override
-    public boolean resetPassword(Long userId, String newPassword) {
-        return false;
-    }
-
-    @Override
-    public boolean updateUserStatus(Long userId, Integer status) {
-        return false;
+    public SystemUserEntity getById(Long id) {
+        return systemUserMapper.selectById(id);
     }
 }
