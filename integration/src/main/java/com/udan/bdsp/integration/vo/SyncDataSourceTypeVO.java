@@ -22,9 +22,6 @@ public class SyncDataSourceTypeVO {
     @Schema(description = "数据源类型名称")
     private String name;
 
-    @Schema(description = "数据源类型描述")
-    private String description;
-
     @Schema(description = "默认端口")
     private Integer defaultPort;
 } 

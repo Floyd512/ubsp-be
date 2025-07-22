@@ -7,7 +7,6 @@
     <select id="pageDataSourceInfo" resultType="com.udan.bdsp.integration.vo.SyncDataSourceInfoVO">
         SELECT sds.id,
                sds.datasource_name,
-               sds.datasource_code,
                sds.datasource_type,
                sds.host,
                sds.port,

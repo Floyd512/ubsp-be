@@ -48,7 +48,6 @@ public class SyncDataSourceController {
                 .map(type -> new SyncDataSourceTypeVO(
                         type.getCode(),
                         type.getName(),
-                        type.getDescription(),
                         type.getDefaultPort()
                 ))
                 .collect(Collectors.toList());

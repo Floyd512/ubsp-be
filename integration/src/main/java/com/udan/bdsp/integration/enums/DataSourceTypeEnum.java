@@ -13,21 +13,21 @@ import lombok.Getter;
 public enum DataSourceTypeEnum implements BaseEnum {
 
     // 关系型数据库
-    MYSQL(1, "MySQL", "MySQL关系型数据库", 3306),
-    POSTGRESQL(2, "PostgreSQL", "PostgreSQL关系型数据库", 5432),
+    MYSQL(1, "MySQL", 3306),
+    POSTGRESQL(2, "PostgreSQL", 5432),
 
     // NoSQL数据库
-    REDIS(3, "Redis", "Redis内存数据库", 6379),
-    ELASTICSEARCH(4, "ElasticSearch", "ElasticSearch搜索引擎", 9200),
+    REDIS(3, "Redis", 6379),
+    ELASTICSEARCH(4, "ElasticSearch", 9200),
 
     // 消息队列
-    KAFKA(5, "Kafka", "Apache Kafka消息队列", 9092),
+    KAFKA(5, "Kafka", 9092),
 
     // 文件存储
-    LOCAL_FILE(6, "本地文件", "本地文件系统存储", null),
-    HDFS_FILE(7, "HDFS", "Hadoop分布式文件系统", 8020),
-    OSS_FILE(8, "阿里云OSS", "阿里云对象存储服务", null),
-    MINIO_FILE(9, "MinIO", "MinIO对象存储", 9000);
+    LOCAL_FILE(6, "本地文件", null),
+    HDFS_FILE(7, "HDFS", 8020),
+    OSS_FILE(8, "阿里云OSS", null),
+    MINIO_FILE(9, "MinIO", 9000);
 
     @EnumValue
     @JsonValue
@@ -36,15 +36,11 @@ public enum DataSourceTypeEnum implements BaseEnum {
     private final String name;
 
     @Getter
-    private final String description;
-
-    @Getter
     private final Integer defaultPort;
 
-    DataSourceTypeEnum(Integer code, String name, String description, Integer defaultPort) {
+    DataSourceTypeEnum(Integer code, String name, Integer defaultPort) {
         this.code = code;
         this.name = name;
-        this.description = description;
         this.defaultPort = defaultPort;
     }
 

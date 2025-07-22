@@ -30,10 +30,6 @@ public class SyncDataSourceEntity extends BaseEntity {
     @Schema(description = "数据源名称", example = "生产MySQL")
     private String datasourceName;
 
-    @TableField("datasource_code")
-    @Schema(description = "数据源编码（唯一）", example = "PROD_MYSQL_MAIN")
-    private String datasourceCode;
-
     @TableField("datasource_type")
     @Schema(description = "数据源类型", example = "1", allowableValues = {"1", "2", "3", "4", "5", "6", "7", "8", "9"})
     private DataSourceTypeEnum datasourceType;
