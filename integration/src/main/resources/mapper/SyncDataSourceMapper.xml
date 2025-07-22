@@ -18,8 +18,8 @@
                sds.status,
                sds.created_id,
                sds.updated_id,
-               su_create.username AS createdByName,
-               su_update.username AS updatedByName,
+               su_create.real_name AS created_by_name,
+               su_update.real_name AS updated_by_name,
                sds.create_time,
                sds.update_time
         FROM bdsp_sync_datasource sds
