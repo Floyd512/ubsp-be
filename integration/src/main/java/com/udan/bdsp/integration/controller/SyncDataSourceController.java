@@ -3,7 +3,9 @@ package com.udan.bdsp.integration.controller;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.udan.bdsp.common.interceptor.AuthenticationInterceptor;
 import com.udan.bdsp.common.result.Result;
+import com.udan.bdsp.integration.dto.SaveOrUpdateDataSourceDTO;
 import com.udan.bdsp.integration.dto.SyncDataSourcePageQueryDTO;
 import com.udan.bdsp.integration.dto.UpdateDataSourceStatusDTO;
 import com.udan.bdsp.integration.entity.SyncDataSourceEntity;
@@ -13,6 +15,7 @@ import com.udan.bdsp.integration.vo.SyncDataSourceTypeVO;
 import com.udan.bdsp.integration.vo.SyncDataSourceInfoVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,10 +60,18 @@ public class SyncDataSourceController {
 
     @Operation(summary = "根据ID修改数据源可用状态")
     @PostMapping("updateDataSourceStatusById")
-    public Result updateDataSourceStatusById(@RequestBody UpdateDataSourceStatusDTO statusDTO) {
+    public Result<Void> updateDataSourceStatusById(@RequestBody UpdateDataSourceStatusDTO statusDTO) {
         LambdaUpdateWrapper<SyncDataSourceEntity> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(SyncDataSourceEntity::getId, statusDTO.getId()).set(SyncDataSourceEntity::getStatus, statusDTO.getStatus());
         dataSourceService.update(updateWrapper);
+        return Result.ok();
+    }
+
+    @Operation(summary = "保存或更新数据源")
+    @PostMapping("savaOrUpdateDataSource")
+    public Result<Void> savaOrUpdateDataSource(@RequestBody SaveOrUpdateDataSourceDTO sourceDTO, HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute(AuthenticationInterceptor.USER_ID_ATTR);
+        dataSourceService.savaOrUpdateDataSource(sourceDTO, userId);
         return Result.ok();
     }
 }

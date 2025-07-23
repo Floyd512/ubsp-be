@@ -4,6 +4,7 @@ package com.udan.bdsp.integration.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.udan.bdsp.integration.dto.SaveOrUpdateDataSourceDTO;
 import com.udan.bdsp.integration.dto.SyncDataSourcePageQueryDTO;
 import com.udan.bdsp.integration.entity.SyncDataSourceEntity;
 import com.udan.bdsp.integration.mapper.SyncDataSourceMapper;
@@ -27,5 +28,10 @@ public class SyncDataSourceServiceImpl extends ServiceImpl<SyncDataSourceMapper,
     @Override
     public IPage<SyncDataSourceInfoVO> pageDataSourceInfo(Page<SyncDataSourceInfoVO> page, SyncDataSourcePageQueryDTO queryDTO) {
         return sourceMapper.pageDataSourceInfo(page, queryDTO);
+    }
+
+    @Override
+    public void savaOrUpdateDataSource(SaveOrUpdateDataSourceDTO sourceDTO, Long userId) {
+
     }
 }
