@@ -28,11 +28,11 @@ public class SyncDataSourceEntity extends BaseEntity {
 
     @TableField("datasource_name")
     @Schema(description = "数据源名称", example = "生产MySQL")
-    private String datasourceName;
+    private String dataSourceName;
 
     @TableField("datasource_type")
-    @Schema(description = "数据源类型", example = "1", allowableValues = {"1", "2", "3", "4", "5", "6", "7", "8", "9"})
-    private DataSourceTypeEnum datasourceType;
+    @Schema(description = "数据源类型", example = "1")
+    private DataSourceTypeEnum dataSourceType;
 
     @TableField("host")
     @Schema(description = "主机地址", example = "192.168.1.10")

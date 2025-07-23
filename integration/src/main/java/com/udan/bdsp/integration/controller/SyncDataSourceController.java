@@ -1,9 +1,12 @@
 package com.udan.bdsp.integration.controller;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.udan.bdsp.common.result.Result;
 import com.udan.bdsp.integration.dto.SyncDataSourcePageQueryDTO;
+import com.udan.bdsp.integration.dto.UpdateDataSourceStatusDTO;
+import com.udan.bdsp.integration.entity.SyncDataSourceEntity;
 import com.udan.bdsp.integration.enums.DataSourceTypeEnum;
 import com.udan.bdsp.integration.service.SyncDataSourceService;
 import com.udan.bdsp.integration.vo.SyncDataSourceTypeVO;
@@ -11,10 +14,7 @@ import com.udan.bdsp.integration.vo.SyncDataSourceInfoVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,9 +48,19 @@ public class SyncDataSourceController {
                 .map(type -> new SyncDataSourceTypeVO(
                         type.getCode(),
                         type.getName(),
-                        type.getDefaultPort()
+                        type.getDefaultPort(),
+                        type.getCategory()
                 ))
                 .collect(Collectors.toList());
         return Result.ok(dataSourceTypes);
+    }
+
+    @Operation(summary = "根据ID修改数据源可用状态")
+    @PostMapping("updateDataSourceStatusById")
+    public Result updateDataSourceStatusById(@RequestBody UpdateDataSourceStatusDTO statusDTO) {
+        LambdaUpdateWrapper<SyncDataSourceEntity> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(SyncDataSourceEntity::getId, statusDTO.getId()).set(SyncDataSourceEntity::getStatus, statusDTO.getStatus());
+        dataSourceService.update(updateWrapper);
+        return Result.ok();
     }
 }

@@ -1,7 +1,7 @@
 package com.udan.bdsp.integration.vo;
 
+import com.udan.bdsp.integration.enums.DataSourceCategoryEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Schema(description = "数据源类型信息")
 public class SyncDataSourceTypeVO {
 
@@ -24,4 +23,18 @@ public class SyncDataSourceTypeVO {
 
     @Schema(description = "默认端口")
     private Integer defaultPort;
+
+    @Schema(description = "数据源分类")
+    private Integer categoryCode;
+
+    @Schema(description = "数据源分类名称")
+    private String categoryName;
+
+    public SyncDataSourceTypeVO(Integer code, String name, Integer defaultPort, DataSourceCategoryEnum categoryEnum) {
+        this.code = code;
+        this.name = name;
+        this.defaultPort = defaultPort;
+        this.categoryCode = categoryEnum.getCode();
+        this.categoryName = categoryEnum.getName();
+    }
 } 

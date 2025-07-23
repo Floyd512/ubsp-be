@@ -11,7 +11,7 @@ import lombok.Data;
  * @Date 2025-07-21 18:25:06
  */
 @Data
-@Schema(description = "查询数据源列表实体")
+@Schema(description = "数据源分页查询DTO")
 public class SyncDataSourcePageQueryDTO {
 
     @Schema(description = "数据源名称")
