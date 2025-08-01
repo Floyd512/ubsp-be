@@ -18,7 +18,7 @@ public class SyncDataSourcePageQueryDTO {
     private String dataSourceName;
 
     @Schema(description = "数据源类型", example = "1")
-    private DataSourceTypeEnum datasourceType;
+    private DataSourceTypeEnum dataSourceType;
 
     @Schema(description = "状态", example = "1", allowableValues = {"0", "1"})
     private BaseStatusEnum status;

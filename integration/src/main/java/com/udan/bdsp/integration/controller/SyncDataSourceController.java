@@ -14,6 +14,7 @@ import com.udan.bdsp.integration.service.SyncDataSourceService;
 import com.udan.bdsp.integration.vo.SyncDataSourceTypeVO;
 import com.udan.bdsp.integration.vo.SyncDataSourceInfoVO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +37,16 @@ public class SyncDataSourceController {
     @Autowired
     private SyncDataSourceService dataSourceService;
 
-    @Operation(summary = "根据条件分页查询数据源列表")
+    @Operation(summary = "根据条件分页查询数据源列表", security = @SecurityRequirement(name = "Authorization"))
     @GetMapping("pageDataSource")
-    public Result<IPage<SyncDataSourceInfoVO>> pageDataSourceInfo(@RequestParam long current, @RequestParam long size, SyncDataSourcePageQueryDTO queryDTO) {
+    public Result<IPage<SyncDataSourceInfoVO>> pageDataSourceInfo(@RequestParam long current, @RequestParam long size,
+            SyncDataSourcePageQueryDTO queryDTO) {
         Page<SyncDataSourceInfoVO> page = new Page<>(current, size);
         IPage<SyncDataSourceInfoVO> result = dataSourceService.pageDataSourceInfo(page, queryDTO);
         return Result.ok(result);
     }
 
-    @Operation(summary = "获取数据源类型列表")
+    @Operation(summary = "获取数据源类型列表", security = @SecurityRequirement(name = "Authorization"))
     @GetMapping("dataSourceTypes")
     public Result<List<SyncDataSourceTypeVO>> getDataSourceTypes() {
         List<SyncDataSourceTypeVO> dataSourceTypes = Arrays.stream(DataSourceTypeEnum.values())
@@ -52,26 +54,34 @@ public class SyncDataSourceController {
                         type.getCode(),
                         type.getName(),
                         type.getDefaultPort(),
-                        type.getCategory()
-                ))
+                        type.getCategory()))
                 .collect(Collectors.toList());
         return Result.ok(dataSourceTypes);
     }
 
-    @Operation(summary = "根据ID修改数据源可用状态")
+    @Operation(summary = "根据ID修改数据源可用状态", security = @SecurityRequirement(name = "Authorization"))
     @PostMapping("updateDataSourceStatusById")
     public Result<Void> updateDataSourceStatusById(@RequestBody UpdateDataSourceStatusDTO statusDTO) {
         LambdaUpdateWrapper<SyncDataSourceEntity> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.eq(SyncDataSourceEntity::getId, statusDTO.getId()).set(SyncDataSourceEntity::getStatus, statusDTO.getStatus());
+        updateWrapper.eq(SyncDataSourceEntity::getId, statusDTO.getId()).set(SyncDataSourceEntity::getStatus,
+                statusDTO.getStatus());
         dataSourceService.update(updateWrapper);
         return Result.ok();
     }
 
-    @Operation(summary = "保存或更新数据源")
+    @Operation(summary = "保存或更新数据源", security = @SecurityRequirement(name = "Authorization"))
     @PostMapping("savaOrUpdateDataSource")
-    public Result<Void> savaOrUpdateDataSource(@RequestBody SaveOrUpdateDataSourceDTO sourceDTO, HttpServletRequest request) {
+    public Result<Void> savaOrUpdateDataSource(@RequestBody SaveOrUpdateDataSourceDTO sourceDTO,
+            HttpServletRequest request) {
         Long userId = (Long) request.getAttribute(AuthenticationInterceptor.USER_ID_ATTR);
         dataSourceService.savaOrUpdateDataSource(sourceDTO, userId);
+        return Result.ok();
+    }
+
+    @Operation(summary = "根据ID删除数据源", security = @SecurityRequirement(name = "Authorization"))
+    @DeleteMapping("deleteDataSource/{id}")
+    public Result<Void> deleteDataSource(@PathVariable Long id) {
+        dataSourceService.removeById(id);
         return Result.ok();
     }
 }

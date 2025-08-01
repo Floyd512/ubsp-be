@@ -6,8 +6,8 @@
 
     <select id="pageDataSourceInfo" resultType="com.udan.bdsp.integration.vo.SyncDataSourceInfoVO">
         SELECT sds.id,
-               sds.datasource_name,
-               sds.datasource_type,
+               sds.data_source_name,
+               sds.data_source_type,
                sds.host,
                sds.port,
                sds.username,
@@ -29,10 +29,10 @@
         <where>
             sds.is_deleted = 0
             <if test="queryDTO.dataSourceName != null and queryDTO.dataSourceName != ''">
-                AND sds.datasource_name LIKE CONCAT('%', #{queryDTO.dataSourceName}, '%')
+                AND sds.data_source_name LIKE CONCAT('%', #{queryDTO.dataSourceName}, '%')
             </if>
-            <if test="queryDTO.datasourceType != null">
-                AND sds.datasource_type = #{queryDTO.datasourceType}
+            <if test="queryDTO.dataSourceType != null">
+                AND sds.data_source_type = #{queryDTO.dataSourceType}
             </if>
             <if test="queryDTO.status != null">
                 AND sds.status = #{queryDTO.status}

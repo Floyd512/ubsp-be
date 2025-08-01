@@ -26,11 +26,11 @@ public class SyncDataSourceEntity extends BaseEntity {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @TableField("datasource_name")
+    @TableField("data_source_name")
     @Schema(description = "数据源名称", example = "生产MySQL")
     private String dataSourceName;
 
-    @TableField("datasource_type")
+    @TableField("data_source_type")
     @Schema(description = "数据源类型", example = "1")
     private DataSourceTypeEnum dataSourceType;
 

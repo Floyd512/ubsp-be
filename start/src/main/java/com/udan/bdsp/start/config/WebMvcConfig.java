@@ -31,7 +31,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor)
-                .addPathPatterns("/api/system/**") // 拦截所有系统管理相关接口
+                .addPathPatterns(
+                        "/api/system/**",
+                        "/api/integration/**"
+                )
                 .excludePathPatterns("/api/system/login", "/api/system/captcha"); // 登录、验证码接口放行
     }
 }
