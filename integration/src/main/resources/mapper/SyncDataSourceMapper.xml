@@ -21,7 +21,7 @@
                su_update.real_name AS updated_by_name,
                sds.create_time,
                sds.update_time
-        FROM bdsp_sync_datasource sds
+        FROM ubsp_sync_data_source sds
                  LEFT JOIN sys_user su_create
                            ON sds.created_id = su_create.id AND su_create.is_deleted = 0
                  LEFT JOIN sys_user su_update

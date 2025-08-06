@@ -9,7 +9,7 @@ import com.udan.bdsp.integration.vo.SyncDataSourceInfoVO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * @Description 针对表【bdsp_datasource(数据源表)】的数据库操作Mapper
+ * @Description 针对表【ubsp_datasource】的数据库操作Mapper
  * @Author TOM FORD
  * @Date 2025-07-16 13:53:07
  */

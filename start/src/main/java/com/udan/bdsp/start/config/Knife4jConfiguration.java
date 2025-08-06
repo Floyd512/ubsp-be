@@ -30,8 +30,8 @@ public class Knife4jConfiguration {
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("BDSP大数据服务平台API文档")
-                        .description("BigData Service Platform - 一站式大数据服务平台")
+                        .title("UBSP大数据服务平台API文档")
+                        .description("UDAN BigData Service Platform - 一站式大数据服务平台")
                         .version("1.0.0")
                         .contact(new Contact()
                                 .name("TOM FORD")

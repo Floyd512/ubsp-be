@@ -14,7 +14,8 @@ public enum DataSourceCategoryEnum implements BaseEnum {
     RELATIONAL_DB(1, "关系型数据库"),
     NOSQL(2, "NoSQL"),
     MQ(3, "消息队列"),
-    FILE_STORAGE(4, "文件存储");
+    SEARCH_ENGINE(4, "搜索引擎"),
+    FILE_STORAGE(5, "文件存储");
 
     @EnumValue
     @JsonValue

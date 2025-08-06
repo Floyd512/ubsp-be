@@ -9,33 +9,27 @@ import com.udan.bdsp.integration.dto.SaveOrUpdateDataSourceDTO;
 import com.udan.bdsp.integration.dto.SyncDataSourcePageQueryDTO;
 import com.udan.bdsp.integration.dto.UpdateDataSourceStatusDTO;
 import com.udan.bdsp.integration.entity.SyncDataSourceEntity;
-import com.udan.bdsp.integration.enums.DataSourceTypeEnum;
 import com.udan.bdsp.integration.service.SyncDataSourceService;
-import com.udan.bdsp.integration.vo.SyncDataSourceTypeVO;
 import com.udan.bdsp.integration.vo.SyncDataSourceInfoVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
- * @Description 同步数据源Controller
+ * @Description 同步数据源 Controller
  * @Author TOM FORD
  * @Date 2025-07-16 13:42:49
  */
-@Tag(name = "02-数据集成")
+@Tag(name = "数据源管理")
 @RestController
 @RequestMapping("/api/integration")
+@RequiredArgsConstructor
 public class SyncDataSourceController {
 
-    @Autowired
-    private SyncDataSourceService dataSourceService;
+    private final SyncDataSourceService dataSourceService;
 
     @Operation(summary = "根据条件分页查询数据源列表", security = @SecurityRequirement(name = "Authorization"))
     @GetMapping("pageDataSource")
@@ -44,19 +38,6 @@ public class SyncDataSourceController {
         Page<SyncDataSourceInfoVO> page = new Page<>(current, size);
         IPage<SyncDataSourceInfoVO> result = dataSourceService.pageDataSourceInfo(page, queryDTO);
         return Result.ok(result);
-    }
-
-    @Operation(summary = "获取数据源类型列表", security = @SecurityRequirement(name = "Authorization"))
-    @GetMapping("dataSourceTypes")
-    public Result<List<SyncDataSourceTypeVO>> getDataSourceTypes() {
-        List<SyncDataSourceTypeVO> dataSourceTypes = Arrays.stream(DataSourceTypeEnum.values())
-                .map(type -> new SyncDataSourceTypeVO(
-                        type.getCode(),
-                        type.getName(),
-                        type.getDefaultPort(),
-                        type.getCategory()))
-                .collect(Collectors.toList());
-        return Result.ok(dataSourceTypes);
     }
 
     @Operation(summary = "根据ID修改数据源可用状态", security = @SecurityRequirement(name = "Authorization"))

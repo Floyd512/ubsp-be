@@ -19,7 +19,7 @@ import java.io.Serial;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("bdsp_sync_datasource")
+@TableName("ubsp_sync_data_source")
 @Schema(description = "同步数据源实体")
 public class SyncDataSourceEntity extends BaseEntity {
 
@@ -31,7 +31,7 @@ public class SyncDataSourceEntity extends BaseEntity {
     private String dataSourceName;
 
     @TableField("data_source_type")
-    @Schema(description = "数据源类型", example = "1")
+    @Schema(description = "数据源类型编码", example = "1")
     private DataSourceTypeEnum dataSourceType;
 
     @TableField("host")

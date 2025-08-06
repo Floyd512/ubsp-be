@@ -28,11 +28,12 @@ public enum ResultCodeEnum {
     ADMIN_ACCOUNT_ERROR(307, "用户名或密码错误"),
     ADMIN_ACCOUNT_DISABLED_ERROR(308, "该用户已被禁用"),
     ADMIN_ACCESS_FORBIDDEN(309, "无访问权限"),
-    ADMIN_ACCOUNT_DISABLED(308, "该用户已被禁用"),
+    ADMIN_ACCOUNT_DISABLED(310, "该用户已被禁用"),
 
-    // App端
-//    APP_NOT_LOGGED_IN(501, "未登陆"),
-//    APP_CODE_EXPIRED(505, "验证码已过期"),
+
+    // 数据集成
+    INTEGRATION_UNSUPPORTED_DATA_TYPE(401, "不支持的数据类型"),
+
 
     // Token
     TOKEN_EXPIRED(601, "token过期"),
