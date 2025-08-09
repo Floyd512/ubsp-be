@@ -1,7 +1,7 @@
 package com.udan.bdsp.common.interceptor;
 
 import com.udan.bdsp.common.exception.LeaseException;
-import com.udan.bdsp.common.result.ResultCodeEnum;
+import com.udan.bdsp.common.enums.ResultCodeEnum;
 import com.udan.bdsp.common.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Component;

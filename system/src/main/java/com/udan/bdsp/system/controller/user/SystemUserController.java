@@ -1,7 +1,7 @@
 package com.udan.bdsp.system.controller.user;
 
 import com.udan.bdsp.common.interceptor.AuthenticationInterceptor;
-import com.udan.bdsp.common.result.Result;
+import com.udan.bdsp.common.utils.Result;
 import com.udan.bdsp.system.service.SystemUserService;
 import com.udan.bdsp.system.vo.SystemUserItemVo;
 import io.swagger.v3.oas.annotations.Operation;

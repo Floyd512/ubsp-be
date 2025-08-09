@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.udan.bdsp.common.interceptor.AuthenticationInterceptor;
-import com.udan.bdsp.common.result.Result;
+import com.udan.bdsp.common.utils.Result;
 import com.udan.bdsp.integration.dto.SaveOrUpdateDataSourceDTO;
 import com.udan.bdsp.integration.dto.SyncDataSourcePageQueryDTO;
 import com.udan.bdsp.integration.dto.UpdateDataSourceStatusDTO;

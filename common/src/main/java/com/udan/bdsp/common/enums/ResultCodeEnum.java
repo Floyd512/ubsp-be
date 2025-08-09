@@ -1,4 +1,4 @@
-package com.udan.bdsp.common.result;
+package com.udan.bdsp.common.enums;
 
 import lombok.Getter;
 
@@ -32,7 +32,8 @@ public enum ResultCodeEnum {
 
 
     // 数据集成
-    INTEGRATION_UNSUPPORTED_DATA_TYPE(401, "不支持的数据类型"),
+    INTEGRATION_UNSUPPORTED_DATA_TYPE(411, "不支持的数据类型"),
+    INTEGRATION_CONFIG_TEMPLATE_NOT_FOUND(412, "未找到对应的配置模板"),
 
 
     // Token

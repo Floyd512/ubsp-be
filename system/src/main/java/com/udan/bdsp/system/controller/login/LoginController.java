@@ -1,6 +1,6 @@
 package com.udan.bdsp.system.controller.login;
 
-import com.udan.bdsp.common.result.Result;
+import com.udan.bdsp.common.utils.Result;
 import com.udan.bdsp.system.dto.LoginDTO;
 import com.udan.bdsp.system.service.LoginService;
 import com.udan.bdsp.system.vo.CaptchaVo;

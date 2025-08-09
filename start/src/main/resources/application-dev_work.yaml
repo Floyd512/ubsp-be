@@ -6,7 +6,7 @@ spring:
     
   # 数据库配置 (工作电脑的虚拟机地址)
   datasource:
-    url: jdbc:mysql://10.0.120.193:3306/bdsp?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
+    url: jdbc:mysql://10.0.120.193:3306/ubsp?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
     username: root
     password: rootTsk@123
     

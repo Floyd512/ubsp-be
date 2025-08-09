@@ -1,5 +1,6 @@
-package com.udan.bdsp.common.result;
+package com.udan.bdsp.common.utils;
 
+import com.udan.bdsp.common.enums.ResultCodeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

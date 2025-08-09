@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.udan.bdsp.integration.mapper.DataSourceTypeMapper">
+
+    <!-- 获取数据源类型支持的节点类型 -->
+    <select id="selectSupportedNodeTypes" resultType="Map">
+        SELECT 
+            dst.type_code,
+            GROUP_CONCAT(ct.node_type) as supported_node_types
+        FROM ubsp_di_data_source_type dst
+        LEFT JOIN ubsp_di_config_template ct ON dst.type_code = ct.type_code 
+            AND ct.status = 1 AND ct.is_deleted = 0
+        WHERE dst.status = 1 AND dst.is_deleted = 0
+        GROUP BY dst.type_code
+        ORDER BY dst.type_code
+    </select>
+
+</mapper>

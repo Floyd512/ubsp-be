@@ -2,7 +2,7 @@ package com.udan.bdsp.system.service.impl;
 
 import com.udan.bdsp.common.constant.RedisConstant;
 import com.udan.bdsp.common.exception.LeaseException;
-import com.udan.bdsp.common.result.ResultCodeEnum;
+import com.udan.bdsp.common.enums.ResultCodeEnum;
 import com.udan.bdsp.common.utils.JwtUtil;
 import com.udan.bdsp.system.dto.LoginDTO;
 import com.udan.bdsp.system.entity.SystemUserEntity;

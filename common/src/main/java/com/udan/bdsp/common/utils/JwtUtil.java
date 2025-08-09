@@ -1,7 +1,7 @@
 package com.udan.bdsp.common.utils;
 
 import com.udan.bdsp.common.exception.LeaseException;
-import com.udan.bdsp.common.result.ResultCodeEnum;
+import com.udan.bdsp.common.enums.ResultCodeEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 

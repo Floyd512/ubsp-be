@@ -1,6 +1,6 @@
 package com.udan.bdsp.common.exception;
 
-import com.udan.bdsp.common.result.Result;
+import com.udan.bdsp.common.utils.Result;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

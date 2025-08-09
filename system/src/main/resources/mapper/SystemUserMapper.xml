@@ -16,7 +16,7 @@
                last_login_time,
                last_login_ip,
                remark
-        from sys_user
+        from ubsp_sys_user
         where is_deleted = 0
           and username = #{username}
     </select>

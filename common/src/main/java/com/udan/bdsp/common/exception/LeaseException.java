@@ -1,6 +1,6 @@
 package com.udan.bdsp.common.exception;
 
-import com.udan.bdsp.common.result.ResultCodeEnum;
+import com.udan.bdsp.common.enums.ResultCodeEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

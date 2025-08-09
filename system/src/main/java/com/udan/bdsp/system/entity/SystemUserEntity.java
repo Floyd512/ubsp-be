@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_user")
+@TableName("ubsp_sys_user")
 @Schema(description = "用户实体")
 public class SystemUserEntity extends BaseEntity {
 

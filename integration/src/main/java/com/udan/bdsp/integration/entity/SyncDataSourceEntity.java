@@ -19,7 +19,7 @@ import java.io.Serial;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("ubsp_sync_data_source")
+@TableName("ubsp_di_sync_data_source")
 @Schema(description = "同步数据源实体")
 public class SyncDataSourceEntity extends BaseEntity {
 
