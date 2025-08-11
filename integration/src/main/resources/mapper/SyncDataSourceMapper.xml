@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.udan.bdsp.integration.mapper.SyncDataSourceMapper">
+<mapper namespace="com.udan.ubsp.integration.mapper.SyncDataSourceMapper">
 
-    <select id="pageDataSourceInfo" resultType="com.udan.bdsp.integration.vo.SyncDataSourceInfoVO">
+    <select id="pageDataSourceInfo" resultType="com.udan.ubsp.integration.vo.SyncDataSourceInfoVO">
         SELECT sds.id,
                sds.data_source_name,
                sds.data_source_type,

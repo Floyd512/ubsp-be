@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.udan.bdsp.system.mapper.SystemUserMapper">
+<mapper namespace="com.udan.ubsp.system.mapper.SystemUserMapper">
 
-    <select id="selectOneByUsername" resultType="com.udan.bdsp.system.entity.SystemUserEntity">
+    <select id="selectOneByUsername" resultType="com.udan.ubsp.system.entity.SystemUserEntity">
         select id,
                username,
                password,

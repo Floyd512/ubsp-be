@@ -2,12 +2,12 @@
 
 spring:
   application:
-    name: bdsp-be-prod
+    name: ubsp-be-prod
     
   # 数据库配置 (生产环境)
   datasource:
-    url: jdbc:mysql://prod-mysql-server:3306/bdsp?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
-    username: bdsp_user
+    url: jdbc:mysql://prod-mysql-server:3306/ubsp?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
+    username: ubsp_user
     password: ${DB_PASSWORD} # 生产环境建议使用环境变量
     
   # Redis配置  
@@ -21,9 +21,9 @@ spring:
 # 生产环境日志配置
 logging:
   level:
-    com.udan.bdsp: info
+    com.udan.ubsp: info
     root: warn
   pattern:
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file:
-    name: logs/bdsp-be.log
+    name: logs/ubsp-be.log

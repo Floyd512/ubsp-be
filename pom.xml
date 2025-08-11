@@ -10,11 +10,11 @@
 
 
     <groupId>com.udan</groupId>
-    <artifactId>bdsp-be</artifactId>
+    <artifactId>ubsp-be</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>bdsp-be</name>
-    <description>bdsp后端项目</description>
+    <name>ubsp-be</name>
+    <description>UBSP-后端项目</description>
     <modules>
         <module>common</module>
         <module>start</module>

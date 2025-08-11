@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.udan</groupId>
-        <artifactId>bdsp-be</artifactId>
+        <artifactId>ubsp-be</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -91,7 +91,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- knife4j -->
+        <!-- knife -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
