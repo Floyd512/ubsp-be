@@ -1,9 +1,11 @@
 package com.udan.ubsp.integration.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.udan.ubsp.integration.entity.SyncTaskEntity;
+import com.udan.ubsp.integration.entity.SyncTaskVersionEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface SyncTaskMapper extends BaseMapper<SyncTaskEntity> {
+public interface SyncTaskVersionMapper extends BaseMapper<SyncTaskVersionEntity> {
 }
+
+

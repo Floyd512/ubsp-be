@@ -10,67 +10,78 @@ import lombok.EqualsAndHashCode;
 import java.io.Serial;
 
 /**
- * @Description ubsp_sync_task 实体类
+ * @Description 同步任务主表：任务元数据与关键冗余字段（ubsp_sync_task）
  * @Author TOM FORD
- * @Date 2025-08-05 17:22:33
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("ubsp_sync_task")
-@Schema(description = "同步数据源实体")
+@TableName("ubsp_di_sync_task")
+@Schema(description = "同步任务实体")
 public class SyncTaskEntity extends BaseEntity {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @TableField("task_name")
-    @Schema(description = "任务名称", example = "ElasticSearch 导数")
-    private String taskName;
-
     @TableField("task_code")
-    @Schema(description = "任务编码", example = "UUID 12位")
+    @Schema(description = "任务编码", example = "8f3e2a6b1c9d")
     private String taskCode;
 
+    @TableField("task_name")
+    @Schema(description = "任务名称", example = "ES到本地文件-报警历史导出")
+    private String taskName;
+
+    @TableField("description")
+    @Schema(description = "任务描述")
+    private String description;
+
     @TableField("source_datasource_id")
-    @Schema(description = "源数据源ID", example = "1")
+    @Schema(description = "源数据源ID")
     private Long sourceDatasourceId;
 
-    @TableField("target_datasource_id")
-    @Schema(description = "目标数据源ID", example = "1")
-    private Long targetDatasourceId;
+    @TableField("sink_datasource_id")
+    @Schema(description = "目标数据源ID")
+    private Long sinkDatasourceId;
 
-    @TableField("sync_type")
-    @Schema(description = "同步类型(1:全量同步,2:增量同步)", example = "1, 2")
-    private Integer syncType;
+    @TableField("source_type")
+    @Schema(description = "源端类型", example = "elasticsearch")
+    private String sourceType;
 
-    @TableField("sync_mode")
-    @Schema(description = "同步模式(1:手动执行,2:定时调度)", example = "1, 2")
-    private Integer syncMode;
+    @TableField("sink_type")
+    @Schema(description = "目标端类型", example = "LocalFile")
+    private String sinkType;
+
+    @TableField("job_mode")
+    @Schema(description = "作业模式", example = "BATCH")
+    private String jobMode;
+
+    @TableField("parallelism")
+    @Schema(description = "并行度", example = "4")
+    private Integer parallelism;
+
+    @TableField("checkpoint_interval_ms")
+    @Schema(description = "检查点间隔(毫秒)", example = "300000")
+    private Integer checkpointIntervalMs;
+
+    @TableField("schedule_mode")
+    @Schema(description = "调度模式", example = "MANUAL/CRON")
+    private String scheduleMode;
 
     @TableField("cron_expression")
-    @Schema(description = "Cron表达式(定时调度时使用)", example = "0 0 2 * * ?")
+    @Schema(description = "CRON表达式")
     private String cronExpression;
 
-    @TableField("source_config")
-    @Schema(description = "源端配置(JSON格式:表名、字段、条件等)", example = "{\"table\":\"users\",\"fields\":[\"id\",\"name\"]}")
-    private String sourceConfig;
-
-    @TableField("target_config")
-    @Schema(description = "目标端配置(JSON格式:表名、字段映射等)", example = "{\"table\":\"dw_users\",\"fieldMap\":{\"id\":\"user_id\"}}")
-    private String targetConfig;
-
-    @TableField("task_config")
-    @Schema(description = "同步配置(JSON格式:批次大小、并发度等)", example = "{\"batchSize\":1000,\"concurrency\":4}")
-    private String taskConfig;
+    @TableField("timezone")
+    @Schema(description = "时区", example = "Asia/Shanghai")
+    private String timezone;
 
     @TableField("status")
-    @Schema(description = "状态(0:禁用,1:启用)", example = "1")
-    private Integer status;
+    @Schema(description = "状态", example = "ACTIVE/DISABLED/DRAFT/ARCHIVED")
+    private String status;
 
-    @TableField("created_by")
-    @Schema(description = "创建人ID", example = "1001")
-    private Long createdBy;
+    @TableField("current_version_no")
+    @Schema(description = "当前生效版本号", example = "3")
+    private Integer currentVersionNo;
 
-    @TableField("updated_by")
-    @Schema(description = "更新人ID", example = "1002")
-    private Long updatedBy;
+    @TableField("tags")
+    @Schema(description = "标签(JSON字符串)", example = "[\"prod\",\"deptA\"]")
+    private String tags;
 }
