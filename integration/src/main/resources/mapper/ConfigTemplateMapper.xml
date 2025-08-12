@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.udan.ubsp.integration.mapper.ConfigTemplateMapper">
 
+
+    <!-- 配置模板基础查询列 -->
+    <sql id="Base_Column_List">
+        id, template_name, node_type, type_code, field_definitions,
+        config_template, version, status, create_time, update_time, is_deleted
+    </sql>
+
     <!-- 配置模板映射结果 -->
     <resultMap id="BaseResultMap" type="com.udan.ubsp.integration.entity.ConfigTemplateEntity">
         <id column="id" property="id"/>
@@ -17,41 +24,6 @@
         <result column="is_deleted" property="isDeleted"/>
     </resultMap>
 
-    <!-- 配置模板基础查询列 -->
-    <sql id="Base_Column_List">
-        id, template_name, node_type, type_code, field_definitions,
-        config_template, version, status, create_time, update_time, is_deleted
-    </sql>
-
-    <!-- 根据数据源类型和节点类型查询配置模板 -->
-    <select id="selectByTypeCodeAndNodeType" resultMap="BaseResultMap">
-        SELECT 
-        <include refid="Base_Column_List"/>
-        FROM ubsp_di_config_template
-        WHERE type_code = #{typeCode} 
-          AND node_type = #{nodeType} 
-          AND status = 1 
-          AND is_deleted = 0
-    </select>
-
-    <!-- 根据数据源类型查询所有配置模板 -->
-    <select id="selectByTypeCode" parameterType="int" resultMap="BaseResultMap">
-        SELECT 
-        <include refid="Base_Column_List"/>
-        FROM ubsp_di_config_template
-        WHERE type_code = #{typeCode} AND status = 1 AND is_deleted = 0
-        ORDER BY node_type
-    </select>
-
-    <!-- 根据节点类型查询所有配置模板 -->
-    <select id="selectByNodeType" parameterType="int" resultMap="BaseResultMap">
-        SELECT 
-        <include refid="Base_Column_List"/>
-        FROM ubsp_di_config_template
-        WHERE node_type = #{nodeType} AND status = 1 AND is_deleted = 0
-        ORDER BY type_code
-    </select>
-
     <!-- 查询所有启用的配置模板 -->
     <select id="selectEnabledTemplates" resultMap="BaseResultMap">
         SELECT 
@@ -60,64 +32,4 @@
         WHERE status = 1 AND is_deleted = 0
         ORDER BY type_code, node_type
     </select>
-
-    <!-- 插入配置模板 -->
-    <insert id="insert" parameterType="com.udan.ubsp.integration.entity.ConfigTemplateEntity" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO ubsp_di_config_template (
-            template_name, node_type, type_code, field_definitions,
-            config_template, version, status
-        ) VALUES (
-            #{templateName}, #{nodeType}, #{typeCode}, #{fieldDefinitions},
-            #{configTemplate}, #{version}, #{status}
-        )
-    </insert>
-
-    <!-- 更新配置模板 -->
-    <update id="updateById" parameterType="com.udan.ubsp.integration.entity.ConfigTemplateEntity">
-        UPDATE ubsp_di_config_template
-        <set>
-            <if test="templateName != null">template_name = #{templateName},</if>
-            <if test="fieldDefinitions != null">field_definitions = #{fieldDefinitions},</if>
-            <if test="configTemplate != null">config_template = #{configTemplate},</if>
-            <if test="version != null">version = #{version},</if>
-            <if test="status != null">status = #{status},</if>
-            update_time = NOW()
-        </set>
-        WHERE id = #{id} AND is_deleted = 0
-    </update>
-
-    <!-- 逻辑删除配置模板 -->
-    <update id="deleteById" parameterType="long">
-        UPDATE ubsp_di_config_template
-        SET is_deleted = 1, update_time = NOW()
-        WHERE id = #{id}
-    </update>
-
-    <!-- 根据数据源类型和节点类型删除配置模板 -->
-    <update id="deleteByTypeCodeAndNodeType">
-        UPDATE ubsp_di_config_template
-        SET is_deleted = 1, update_time = NOW()
-        WHERE type_code = #{typeCode} AND node_type = #{nodeType}
-    </update>
-
-    <!-- 联合查询：获取数据源类型及其支持的节点类型 -->
-    <select id="selectDataSourceWithSupportedNodeTypes" resultType="map">
-        SELECT 
-            dst.type_code,
-            dst.description as type_name,
-            dst.category_code,
-            dst.default_port,
-            dst.requires_auth,
-            dst.requires_database,
-            GROUP_CONCAT(ct.node_type) as supported_node_types,
-            COUNT(ct.id) as template_count
-        FROM ubsp_di_data_source_type dst
-        LEFT JOIN ubsp_di_config_template ct ON dst.type_code = ct.type_code 
-            AND ct.status = 1 AND ct.is_deleted = 0
-        WHERE dst.status = 1 AND dst.is_deleted = 0
-        GROUP BY dst.type_code, dst.description, dst.category_code, 
-                 dst.default_port, dst.requires_auth, dst.requires_database
-        ORDER BY dst.category_code, dst.type_code
-    </select>
-
 </mapper>

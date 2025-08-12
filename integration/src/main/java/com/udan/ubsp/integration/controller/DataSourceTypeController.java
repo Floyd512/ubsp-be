@@ -25,7 +25,7 @@ public class DataSourceTypeController {
     private final DataSourceTypeService dataSourceTypeService;
 
     @Operation(summary = "获取数据源类型及支持的节点类型", description = "同时获取数据源类型列表和支持的节点类型", security = @SecurityRequirement(name = "Authorization"))
-    @GetMapping("/data-source-types/with-node-types")
+    @GetMapping("/dataSourceTypes/withNodeTypes")
     public Result<List<SourceTypeWithNodeVO>> getDataSourceTypesWithNodeTypes() {
         List<SourceTypeWithNodeVO> dataSourceTypes = dataSourceTypeService.getDataSourceTypesWithNodeTypes();
         return Result.ok(dataSourceTypes);
