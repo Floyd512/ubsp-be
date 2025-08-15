@@ -3,7 +3,6 @@ package com.udan.ubsp.integration.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.udan.ubsp.integration.entity.ConfigTemplateEntity;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

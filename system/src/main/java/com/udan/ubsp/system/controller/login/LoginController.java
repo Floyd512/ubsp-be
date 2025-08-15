@@ -6,7 +6,7 @@ import com.udan.ubsp.system.service.LoginService;
 import com.udan.ubsp.system.vo.CaptchaVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "01-系统管理")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/system")
 public class LoginController {
 
-    @Autowired
-    private LoginService service;
+    private final LoginService service;
 
     @Operation(summary = "获取图形验证码")
     @GetMapping("captcha")

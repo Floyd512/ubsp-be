@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Tag(name = "01-系统管理")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/system")
 public class SystemUserController {
 
-    @Autowired
-    private SystemUserService systemUserService;
+    private final SystemUserService systemUserService;
 
     @Operation(summary = "根据ID查询用户信息", security = @SecurityRequirement(name = "Authorization"))
     @GetMapping("user/info")

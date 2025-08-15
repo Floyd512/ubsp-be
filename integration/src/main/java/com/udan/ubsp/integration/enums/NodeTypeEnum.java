@@ -3,6 +3,7 @@ package com.udan.ubsp.integration.enums;
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.udan.ubsp.common.enums.BaseEnum;
+import lombok.Getter;
 
 import java.util.Arrays;
 
@@ -22,6 +23,7 @@ public enum NodeTypeEnum implements BaseEnum {
 
     private final String name;
 
+    @Getter
     private final String description;
 
     NodeTypeEnum(Integer code, String name, String description) {
@@ -38,10 +40,6 @@ public enum NodeTypeEnum implements BaseEnum {
     @Override
     public String getName() {
         return this.name;
-    }
-
-    public String getDescription() {
-        return this.description;
     }
 
     /**

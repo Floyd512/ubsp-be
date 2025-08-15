@@ -1,7 +1,6 @@
 package com.udan.ubsp.integration.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.udan.ubsp.common.entity.BaseEntity;
 import com.udan.ubsp.common.enums.BaseStatusEnum;
 import com.udan.ubsp.integration.enums.DataSourceCategoryEnum;

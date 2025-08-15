@@ -1,7 +1,5 @@
 package com.udan.ubsp.system.service.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

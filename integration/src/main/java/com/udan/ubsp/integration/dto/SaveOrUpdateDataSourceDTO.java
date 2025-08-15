@@ -1,13 +1,8 @@
 package com.udan.ubsp.integration.dto;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.udan.ubsp.common.entity.BaseEntity;
-import com.udan.ubsp.common.enums.BaseStatusEnum;
-import com.udan.ubsp.integration.entity.SyncDataSourceEntity;
 import com.udan.ubsp.integration.enums.DataSourceTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * @Description

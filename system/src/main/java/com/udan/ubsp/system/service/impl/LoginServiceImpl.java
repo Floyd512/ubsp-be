@@ -1,7 +1,7 @@
 package com.udan.ubsp.system.service.impl;
 
 import com.udan.ubsp.common.constant.RedisConstant;
-import com.udan.ubsp.common.exception.LeaseException;
+import com.udan.ubsp.common.exception.UBSPException;
 import com.udan.ubsp.common.enums.ResultCodeEnum;
 import com.udan.ubsp.common.utils.JwtUtil;
 import com.udan.ubsp.system.dto.LoginDTO;
@@ -46,30 +46,30 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String login(LoginDTO loginDTO) {
         if (!StringUtils.hasLength(loginDTO.getCaptchaCode())) {
-            throw new LeaseException(ResultCodeEnum.ADMIN_CAPTCHA_CODE_NOT_FOUND);
+            throw new UBSPException(ResultCodeEnum.ADMIN_CAPTCHA_CODE_NOT_FOUND);
         }
 
         String code = stringRedisTemplate.opsForValue().get(loginDTO.getCaptchaKey());
         if (!StringUtils.hasLength(code)) {
-            throw new LeaseException(ResultCodeEnum.ADMIN_CAPTCHA_CODE_EXPIRED);
+            throw new UBSPException(ResultCodeEnum.ADMIN_CAPTCHA_CODE_EXPIRED);
         }
 
         if (!code.equals(loginDTO.getCaptchaCode().toLowerCase())) {
-            throw new LeaseException(ResultCodeEnum.ADMIN_CAPTCHA_CODE_ERROR);
+            throw new UBSPException(ResultCodeEnum.ADMIN_CAPTCHA_CODE_ERROR);
         }
 
         SystemUserEntity systemUserEntity = systemUserMapper.selectOneByUsername(loginDTO.getUsername());
 
         if (systemUserEntity == null) {
-            throw new LeaseException(ResultCodeEnum.ADMIN_ACCOUNT_NOT_EXIST_ERROR);
+            throw new UBSPException(ResultCodeEnum.ADMIN_ACCOUNT_NOT_EXIST_ERROR);
         }
 
         if (systemUserEntity.getAccountStatus() == BaseStatusEnum.DISABLE) {
-            throw new LeaseException(ResultCodeEnum.ADMIN_ACCOUNT_DISABLED_ERROR);
+            throw new UBSPException(ResultCodeEnum.ADMIN_ACCOUNT_DISABLED_ERROR);
         }
 
         if (!systemUserEntity.getPassword().equals(DigestUtils.md5Hex(loginDTO.getPassword()))) {
-            throw new LeaseException(ResultCodeEnum.ADMIN_ACCOUNT_ERROR);
+            throw new UBSPException(ResultCodeEnum.ADMIN_ACCOUNT_ERROR);
         }
 
         //创建JWT

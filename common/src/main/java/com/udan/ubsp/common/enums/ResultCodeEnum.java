@@ -34,6 +34,10 @@ public enum ResultCodeEnum {
     // 数据集成
     INTEGRATION_UNSUPPORTED_DATA_TYPE(411, "不支持的数据类型"),
     INTEGRATION_CONFIG_TEMPLATE_NOT_FOUND(412, "未找到对应的配置模板"),
+    INTEGRATION_TASK_NOT_FOUND(413, "任务不存在"),
+    INTEGRATION_TASK_CODE_EXISTS(414, "任务编码已存在"),
+    INTEGRATION_VERSION_NOT_FOUND(415, "版本不存在"),
+    INTEGRATION_CONFIG_RENDER_FAILED(416, "配置渲染失败"),
 
 
     // Token

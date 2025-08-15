@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.udan.ubsp.integration.dto.CreateTaskDTO;
+import com.udan.ubsp.integration.dto.SaveOrUpdateTaskDTO;
+import com.udan.ubsp.integration.dto.UpdateVersionDTO;
 import com.udan.ubsp.integration.entity.SyncTaskEntity;
 import com.udan.ubsp.integration.entity.SyncTaskExecutionEntity;
 import com.udan.ubsp.integration.entity.SyncTaskVersionEntity;
@@ -12,6 +15,11 @@ public interface SyncTaskService extends IService<SyncTaskEntity> {
 
     /**
      * 创建任务（草稿或启用），初始化版本号为1
+     */
+    Long createTask(CreateTaskDTO dto);
+
+    /**
+     * 兼容保留：通过实体+散参数创建任务
      */
     Long createTask(SyncTaskEntity task,
                     JsonNode envJson,
@@ -24,6 +32,11 @@ public interface SyncTaskService extends IService<SyncTaskEntity> {
 
     /**
      * 更新并创建新版本（version_no +1），可选择是否切换为当前版本
+     */
+    Integer createNewVersion(UpdateVersionDTO dto);
+
+    /**
+     * 兼容保留：通过散参数创建新版本
      */
     Integer createNewVersion(Long taskId,
                              JsonNode envJson,
@@ -41,7 +54,7 @@ public interface SyncTaskService extends IService<SyncTaskEntity> {
     void switchVersion(Long taskId, Integer versionNo);
 
     /**
-     * 预渲染配置（将 env/source/sink 组装为 seatunnel 支持的 JSON/HOCON 文本）
+     * 预渲染配置（将 env/source/sink 组装为 SeaTunnel 支持的 JSON/HOCON 文本）
      */
     String renderConfigText(JsonNode envJson, JsonNode sourceJson, JsonNode transformsJson, JsonNode sinkJson, String format);
 
@@ -64,4 +77,11 @@ public interface SyncTaskService extends IService<SyncTaskEntity> {
      * 查询执行详情
      */
     SyncTaskExecutionEntity getExecution(Long executionId);
+
+    /**
+     * 保存或更新任务
+     * @param dto 任务数据传输对象
+     * @return 任务ID
+     */
+    Long saveOrUpdateTask(SaveOrUpdateTaskDTO dto);
 }

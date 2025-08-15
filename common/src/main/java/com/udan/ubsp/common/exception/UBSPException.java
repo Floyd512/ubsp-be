@@ -5,21 +5,21 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @Description
+ * @Description UBSP业务异常类
  * @Author TOM FORD
  * @Date 2025-07-12 15:06:13
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class LeaseException extends RuntimeException {
+public class UBSPException extends RuntimeException {
     private Integer code;
 
-    public LeaseException(Integer code, String message) {
+    public UBSPException(Integer code, String message) {
         super(message);
         this.code = code;
     }
 
-    public LeaseException(ResultCodeEnum resultCodeEnum) {
+    public UBSPException(ResultCodeEnum resultCodeEnum) {
         super(resultCodeEnum.getMessage());
         this.code = resultCodeEnum.getCode();
     }

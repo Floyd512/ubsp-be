@@ -1,6 +1,6 @@
 package com.udan.ubsp.common.interceptor;
 
-import com.udan.ubsp.common.exception.LeaseException;
+import com.udan.ubsp.common.exception.UBSPException;
 import com.udan.ubsp.common.enums.ResultCodeEnum;
 import com.udan.ubsp.common.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
@@ -29,7 +29,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
         String token = request.getHeader("Authorization");
         if (token == null || token.isEmpty()) {
-            throw new LeaseException(ResultCodeEnum.ADMIN_LOGIN_AUTH); // 未登录
+            throw new UBSPException(ResultCodeEnum.ADMIN_LOGIN_AUTH); // 未登录
         }
         Claims claims = JwtUtil.parseToken(token);
         Long userId = claims.get("userId", Long.class);

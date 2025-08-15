@@ -1,6 +1,6 @@
 package com.udan.ubsp.common.utils;
 
-import com.udan.ubsp.common.exception.LeaseException;
+import com.udan.ubsp.common.exception.UBSPException;
 import com.udan.ubsp.common.enums.ResultCodeEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -42,7 +42,7 @@ public class JwtUtil {
     public static Claims parseToken(String token) {
 
         if (token == null) {
-            throw new LeaseException(ResultCodeEnum.ADMIN_LOGIN_AUTH); // 无token，未登录
+            throw new UBSPException(ResultCodeEnum.ADMIN_LOGIN_AUTH); // 无token，未登录
         }
 
         try {
@@ -52,9 +52,9 @@ public class JwtUtil {
                     .parseClaimsJws(token);
             return claimsJws.getBody();
         } catch (ExpiredJwtException e) {
-            throw new LeaseException(ResultCodeEnum.TOKEN_EXPIRED);
+            throw new UBSPException(ResultCodeEnum.TOKEN_EXPIRED);
         } catch (JwtException e) {
-            throw new LeaseException(ResultCodeEnum.TOKEN_INVALID);
+            throw new UBSPException(ResultCodeEnum.TOKEN_INVALID);
         }
     }
 }
