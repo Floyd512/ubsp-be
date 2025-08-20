@@ -38,6 +38,7 @@ public enum ResultCodeEnum {
     INTEGRATION_TASK_CODE_EXISTS(414, "任务编码已存在"),
     INTEGRATION_VERSION_NOT_FOUND(415, "版本不存在"),
     INTEGRATION_CONFIG_RENDER_FAILED(416, "配置渲染失败"),
+    INTEGRATION_TASK_EXECUTION_FAILED(417, "任务执行失败"),
 
 
     // Token

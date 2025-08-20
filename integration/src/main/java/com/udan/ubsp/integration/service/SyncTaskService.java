@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.udan.ubsp.integration.dto.SaveOrUpdateTaskDTO;
 import com.udan.ubsp.integration.entity.SyncTaskEntity;
+import com.udan.ubsp.integration.vo.TaskExecutionVO;
 
 public interface SyncTaskService extends IService<SyncTaskEntity> {
 
@@ -19,4 +20,11 @@ public interface SyncTaskService extends IService<SyncTaskEntity> {
      * 分页查询任务
      */
     IPage<SyncTaskEntity> pageTasks(Page<SyncTaskEntity> page, String keyword, Integer status, String sourceType, String sinkType);
+
+    /**
+     * 执行任务
+     * @param taskId 任务ID
+     * @return 执行结果
+     */
+    TaskExecutionVO executeTask(Long taskId);
 }

@@ -5,9 +5,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.udan.ubsp.common.utils.Result;
 import com.udan.ubsp.common.enums.ResultCodeEnum;
 import com.udan.ubsp.common.exception.UBSPException;
+import com.udan.ubsp.integration.dto.ExecuteTaskDTO;
 import com.udan.ubsp.integration.dto.SaveOrUpdateTaskDTO;
 import com.udan.ubsp.integration.entity.SyncTaskEntity;
+import com.udan.ubsp.integration.service.SeaTunnelApiService;
 import com.udan.ubsp.integration.service.SyncTaskService;
+import com.udan.ubsp.integration.vo.TaskExecutionVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 public class SyncTaskController {
 
     private final SyncTaskService taskService;
+    private final SeaTunnelApiService seaTunnelApiService;
 
     @Operation(summary = "保存或更新任务")
     @PostMapping("saveOrUpdate")
@@ -62,6 +66,20 @@ public class SyncTaskController {
     public Result<Void> deleteTask(@PathVariable Long id) {
         taskService.removeById(id);
         return Result.ok();
+    }
+
+    @Operation(summary = "执行任务")
+    @PostMapping("execute")
+    public Result<TaskExecutionVO> executeTask(@RequestBody @Valid ExecuteTaskDTO dto) {
+        TaskExecutionVO result = taskService.executeTask(dto.getTaskId());
+        return Result.ok(result);
+    }
+
+    @Operation(summary = "获取SeaTunnel作业信息")
+    @GetMapping("job-info/{jobId}")
+    public Result<Object> getJobInfo(@PathVariable String jobId) {
+        Object jobInfo = seaTunnelApiService.getJobInfo(jobId);
+        return Result.ok(jobInfo);
     }
 
 }

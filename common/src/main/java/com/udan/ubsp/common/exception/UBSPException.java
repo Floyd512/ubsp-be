@@ -23,4 +23,9 @@ public class UBSPException extends RuntimeException {
         super(resultCodeEnum.getMessage());
         this.code = resultCodeEnum.getCode();
     }
+
+    public UBSPException(ResultCodeEnum resultCodeEnum, String customMessage) {
+        super(customMessage);
+        this.code = resultCodeEnum.getCode();
+    }
 }
