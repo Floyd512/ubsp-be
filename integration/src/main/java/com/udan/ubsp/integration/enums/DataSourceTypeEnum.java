@@ -86,21 +86,4 @@ public enum DataSourceTypeEnum implements BaseEnum {
         }
         return flag;
     }
-
-    /**
-     * 根据代码获取枚举
-     */
-    public static DataSourceTypeEnum getByCode(Integer code) {
-        return Arrays.stream(values())
-                .filter(type -> type.getCode().equals(code))
-                .findFirst()
-                .orElse(null);
-    }
-
-    /**
-     * 检查数据源类型是否存在
-     */
-    public static boolean isValidType(Integer code) {
-        return getByCode(code) != null;
-    }
 }
