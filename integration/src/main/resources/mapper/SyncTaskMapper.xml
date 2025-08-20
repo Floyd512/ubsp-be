@@ -5,8 +5,7 @@
     <!-- 根据任务编码查询任务 -->
     <select id="selectByTaskCode" resultType="com.udan.ubsp.integration.entity.SyncTaskEntity">
         SELECT * FROM ubsp_di_sync_task 
-        WHERE task_code = #{taskCode} 
-        AND is_deleted = 0
+        WHERE task_code = #{taskCode}
     </select>
 
 </mapper>

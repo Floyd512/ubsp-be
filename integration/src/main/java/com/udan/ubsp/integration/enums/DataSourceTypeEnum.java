@@ -30,9 +30,9 @@ public enum DataSourceTypeEnum implements BaseEnum {
     KAFKA(401, "Kafka", 9092, DataSourceCategoryEnum.MQ),
 
     // 文件存储
-    LOCAL_FILE(501, "本地文件", null, DataSourceCategoryEnum.FILE_STORAGE),
+    LOCAL_FILE(501, "LocalFile", null, DataSourceCategoryEnum.FILE_STORAGE),
     HDFS_FILE(502, "HDFS", 8020, DataSourceCategoryEnum.FILE_STORAGE),
-    OSS_FILE(503, "阿里云OSS", null, DataSourceCategoryEnum.FILE_STORAGE),
+    OSS_FILE(503, "OSS", null, DataSourceCategoryEnum.FILE_STORAGE),
     MINIO_FILE(504, "MinIO", 9000, DataSourceCategoryEnum.FILE_STORAGE);
 
 

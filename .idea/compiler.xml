@@ -7,6 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+      </profile>
+      <profile name="Annotation profile for ubsp-be" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$PROJECT_DIR$/../../MavenLocalRepository/org/springframework/boot/spring-boot-configuration-processor/unknown/spring-boot-configuration-processor-unknown.jar" />
+          <entry name="$PROJECT_DIR$/../../MavenLocalRepository/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+          <entry name="$PROJECT_DIR$/../../MavenLocalRepository/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../MavenLocalRepository/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+          <entry name="$PROJECT_DIR$/../../MavenLocalRepository/org/springframework/boot/spring-boot-configuration-processor/3.0.5/spring-boot-configuration-processor-3.0.5.jar" />
+          <entry name="$PROJECT_DIR$/../../MavenLocalRepository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar" />
+        </processorPath>
         <module name="integration" />
         <module name="start" />
         <module name="system" />
@@ -20,6 +33,7 @@
       <module name="integration" options="-parameters" />
       <module name="start" options="-parameters" />
       <module name="system" options="-parameters" />
+      <module name="udsp-be" options="" />
     </option>
   </component>
 </project>
