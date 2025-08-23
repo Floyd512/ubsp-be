@@ -263,8 +263,7 @@ public class SyncTaskServiceImpl extends ServiceImpl<SyncTaskMapper, SyncTaskEnt
             }
             
             // 处理字符串值
-            if (value instanceof String) {
-                String strValue = (String) value;
+            if (value instanceof String strValue) {
                 // 跳过空字符串和占位符
                 if (strValue.trim().isEmpty() || isPlaceholder(strValue)) {
                     log.debug("移除占位符或空值字段: {} = {}", key, strValue);
@@ -290,8 +289,7 @@ public class SyncTaskServiceImpl extends ServiceImpl<SyncTaskMapper, SyncTaskEnt
                         if (cleanedItem != null && !cleanedItem.isEmpty()) {
                             cleanedList.add(cleanedItem);
                         }
-                    } else if (item instanceof String) {
-                        String strItem = (String) item;
+                    } else if (item instanceof String strItem) {
                         if (!strItem.trim().isEmpty() && !isPlaceholder(strItem)) {
                             cleanedList.add(strItem);
                         }
