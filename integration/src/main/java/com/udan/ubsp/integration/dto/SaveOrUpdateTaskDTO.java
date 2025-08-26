@@ -21,12 +21,6 @@ public class SaveOrUpdateTaskDTO {
     @Schema(description = "任务描述")
     private String description;
 
-    @Schema(description = "源数据源ID")
-    private Long sourceDatasourceId;
-
-    @Schema(description = "目标数据源ID")
-    private Long sinkDatasourceId;
-
     @Schema(description = "源端类型", example = "elasticsearch")
     private String sourceType;
 

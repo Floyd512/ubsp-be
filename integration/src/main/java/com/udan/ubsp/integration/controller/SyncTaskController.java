@@ -15,6 +15,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
+import com.udan.ubsp.common.interceptor.AuthenticationInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +35,10 @@ public class SyncTaskController {
 
     @Operation(summary = "保存或更新任务")
     @PostMapping("saveOrUpdate")
-    public Result<Long> saveOrUpdateTask(@RequestBody @Valid SaveOrUpdateTaskDTO dto) {
-        Long taskId = taskService.saveOrUpdateTask(dto);
+    public Result<Long> saveOrUpdateTask(@RequestBody @Valid SaveOrUpdateTaskDTO dto, HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute(AuthenticationInterceptor.USER_ID_ATTR);
+        // 将 userId 放入 DTO 供服务层使用（需要在 DTO 中新增两个字段或改服务层直接使用 userId）
+        Long taskId = taskService.saveOrUpdateTask(dto, userId);
         return Result.ok(taskId);
     }
 

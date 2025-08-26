@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.udan.ubsp.common.enums.BaseEnum;
 import lombok.Getter;
 
-import java.util.Arrays;
-
 /**
  * @Description 数据源类型枚举，支持数据库、中间件和文件存储，可用于Source和Sink
  * @Author TOM FORD

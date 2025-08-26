@@ -36,14 +36,6 @@ public class SyncTaskEntity extends BaseEntity {
     @Schema(description = "任务描述")
     private String description;
 
-    @TableField("source_datasource_id")
-    @Schema(description = "源数据源ID")
-    private Long sourceDatasourceId;
-
-    @TableField("sink_datasource_id")
-    @Schema(description = "目标数据源ID")
-    private Long sinkDatasourceId;
-
     @TableField("source_type")
     @Schema(description = "源端类型", example = "elasticsearch")
     private String sourceType;
@@ -64,6 +56,14 @@ public class SyncTaskEntity extends BaseEntity {
     @Schema(description = "状态", example = "0-未启用，1-启用")
     private Integer status;
 
+    @TableField("create_user_id")
+    @Schema(description = "创建人ID")
+    private Long createUserId;
+
+    @TableField("update_user_id")
+    @Schema(description = "更新人ID")
+    private Long updateUserId;
+
     @TableField("env_json")
     @Schema(description = "环境配置JSON")
     private JsonNode envJson;
@@ -79,4 +79,12 @@ public class SyncTaskEntity extends BaseEntity {
     @TableField("sink_json")
     @Schema(description = "目标端配置JSON")
     private JsonNode sinkJson;
+
+    @TableField(exist = false)
+    @Schema(description = "创建人姓名")
+    private String createUserName;
+
+    @TableField(exist = false)
+    @Schema(description = "更新人姓名")
+    private String updateUserName;
 }

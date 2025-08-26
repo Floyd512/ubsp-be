@@ -14,7 +14,7 @@ public interface SyncTaskService extends IService<SyncTaskEntity> {
      * @param dto 任务数据传输对象
      * @return 任务ID
      */
-    Long saveOrUpdateTask(SaveOrUpdateTaskDTO dto);
+    Long saveOrUpdateTask(SaveOrUpdateTaskDTO dto, Long operatorUserId);
 
     /**
      * 分页查询任务

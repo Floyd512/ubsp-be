@@ -22,8 +22,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.Set;
+import java.util.List;
+import java.util.stream.Collectors;
+import com.udan.ubsp.system.entity.SystemUserEntity;
+import com.udan.ubsp.system.service.SystemUserService;
 
 @Slf4j
 @Service
@@ -33,10 +39,11 @@ public class SyncTaskServiceImpl extends ServiceImpl<SyncTaskMapper, SyncTaskEnt
     private final SyncTaskConvert convert;
     private final SeaTunnelApiService seaTunnelApiService;
     private final ObjectMapper objectMapper;
+    private final SystemUserService systemUserService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long saveOrUpdateTask(SaveOrUpdateTaskDTO dto) {
+    public Long saveOrUpdateTask(SaveOrUpdateTaskDTO dto, Long operatorUserId) {
         SyncTaskEntity task;
 
         if (dto.getId() != null) {
@@ -46,10 +53,10 @@ public class SyncTaskServiceImpl extends ServiceImpl<SyncTaskMapper, SyncTaskEnt
                 throw new UBSPException(ResultCodeEnum.INTEGRATION_TASK_NOT_FOUND);
             }
 
-            // 保存原有的taskCode，避免被覆盖
-            String originalTaskCode = task.getTaskCode();
+            // MapStruct 已忽略 taskCode 映射，这里直接更新其它字段
             convert.updateEntityFromDto(dto, task);
-            task.setTaskCode(originalTaskCode); // 恢复原有taskCode
+            // 记录更新人
+            task.setUpdateUserId(operatorUserId);
         } else {
             // 创建新任务
             task = new SyncTaskEntity();
@@ -62,13 +69,19 @@ public class SyncTaskServiceImpl extends ServiceImpl<SyncTaskMapper, SyncTaskEnt
 
             // 生成UUID任务编码
             task.setTaskCode(generateTaskCode());
+            // 记录创建/更新人
+            task.setCreateUserId(operatorUserId);
         }
 
         // 清理配置JSON，移除未填写的占位符和空值
         cleanConfigurationJson(task);
 
-        // 使用MyBatis Plus的saveOrUpdate方法
-        this.saveOrUpdate(task);
+        // 避免额外一次存在性查询：根据是否有ID决定 insert 或 update
+        if (dto.getId() == null) {
+            this.save(task);
+        } else {
+            this.updateById(task);
+        }
         return task.getId();
     }
 
@@ -81,7 +94,34 @@ public class SyncTaskServiceImpl extends ServiceImpl<SyncTaskMapper, SyncTaskEnt
                 .eq(sourceType != null && !sourceType.isEmpty(), SyncTaskEntity::getSourceType, sourceType)
                 .eq(sinkType != null && !sinkType.isEmpty(), SyncTaskEntity::getSinkType, sinkType)
                 .orderByDesc(SyncTaskEntity::getUpdateTime);
-        return this.page(page, qw);
+        IPage<SyncTaskEntity> result = this.page(page, qw);
+
+        // 追加创建人/更新人姓名
+        List<SyncTaskEntity> records = result.getRecords();
+        if (records != null && !records.isEmpty()) {
+            Set<Long> userIds = records.stream()
+                    .flatMap(t -> java.util.stream.Stream.of(t.getCreateUserId(), t.getUpdateUserId()))
+                    .filter(id -> id != null && id > 0)
+                    .collect(Collectors.toSet());
+            if (!userIds.isEmpty()) {
+                List<SystemUserEntity> users = systemUserService.listByIds(userIds);
+                Map<Long, String> idToName = new HashMap<>();
+                if (users != null) {
+                    for (SystemUserEntity u : users) {
+                        idToName.put(u.getId(), u.getRealName());
+                    }
+                }
+                for (SyncTaskEntity t : records) {
+                    if (t.getCreateUserId() != null) {
+                        t.setCreateUserName(idToName.get(t.getCreateUserId()));
+                    }
+                    if (t.getUpdateUserId() != null) {
+                        t.setUpdateUserName(idToName.get(t.getUpdateUserId()));
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     @Override
