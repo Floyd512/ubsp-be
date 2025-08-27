@@ -1,5 +1,6 @@
 package com.udan.ubsp.integration.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.udan.ubsp.common.utils.Result;
 import com.udan.ubsp.integration.service.SyncTaskExecutionFileService;
 import com.udan.ubsp.integration.service.SyncTaskExecutionService;
@@ -13,8 +14,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Tag(name = "任务执行记录")
 @RestController
 @RequiredArgsConstructor
@@ -25,10 +24,13 @@ public class SyncTaskExecutionController {
 	private final SyncTaskExecutionService executionService;
 	private final SyncTaskExecutionFileService executionFileService;
 
-	@Operation(summary = "根据任务ID查询执行历史记录列表")
+	@Operation(summary = "根据任务ID分页查询执行历史记录")
 	@GetMapping("task/{taskId}/history")
-	public Result<List<TaskExecutionDetailVO>> getHistoryByTaskId(@PathVariable Long taskId) {
-		List<TaskExecutionDetailVO> history = executionService.getExecutionHistoryByTaskId(taskId);
+	public Result<IPage<TaskExecutionDetailVO>> getHistoryByTaskId(
+			@PathVariable Long taskId,
+			@RequestParam(defaultValue = "1") Long current,
+			@RequestParam(defaultValue = "10") Long size) {
+		IPage<TaskExecutionDetailVO> history = executionService.getExecutionHistoryByTaskId(taskId, current, size);
 		return Result.ok(history);
 	}
 

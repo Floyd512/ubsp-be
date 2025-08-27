@@ -1,6 +1,8 @@
 package com.udan.ubsp.integration.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.udan.ubsp.integration.convert.SyncTaskExecutionConvert;
 import com.udan.ubsp.integration.dto.FinalizeExecutionDTO;
@@ -31,20 +33,25 @@ public class SyncTaskExecutionServiceImpl extends ServiceImpl<SyncTaskExecutionM
 	}
 
 	@Override
-	public List<TaskExecutionDetailVO> getExecutionHistoryByTaskId(Long taskId) {
-		// 1. 查询该任务的所有执行记录
+	public IPage<TaskExecutionDetailVO> getExecutionHistoryByTaskId(Long taskId, Long current, Long size) {
+		// 1. 创建分页对象
+		Page<SyncTaskExecutionEntity> page = new Page<>(current, size);
+		
+		// 2. 查询该任务的执行记录（分页）
 		LambdaQueryWrapper<SyncTaskExecutionEntity> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.eq(SyncTaskExecutionEntity::getTaskId, taskId)
 				.orderByDesc(SyncTaskExecutionEntity::getCreateTime);
 		
-		List<SyncTaskExecutionEntity> executions = this.list(queryWrapper);
+		IPage<SyncTaskExecutionEntity> executionPage = this.page(page, queryWrapper);
 		
-		// 2. 转换为VO列表
-		List<TaskExecutionDetailVO> historyList = executions.stream()
+		// 3. 转换为VO分页对象
+		IPage<TaskExecutionDetailVO> resultPage = new Page<>(current, size, executionPage.getTotal());
+		
+		List<TaskExecutionDetailVO> historyList = executionPage.getRecords().stream()
 				.map(execution -> {
 					TaskExecutionDetailVO detailVO = convert.toDetailVO(execution);
 					
-					// 3. 查询每个执行记录关联的文件信息
+					// 4. 查询每个执行记录关联的文件信息
 					try {
 						Long jobIdLong = Long.valueOf(execution.getSeaTunnelJobId());
 						LambdaQueryWrapper<SyncTaskExecutionFileEntity> fileQueryWrapper = new LambdaQueryWrapper<>();
@@ -62,7 +69,8 @@ public class SyncTaskExecutionServiceImpl extends ServiceImpl<SyncTaskExecutionM
 				})
 				.toList();
 		
-		return historyList;
+		resultPage.setRecords(historyList);
+		return resultPage;
 	}
 
 	@Override
