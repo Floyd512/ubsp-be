@@ -25,13 +25,6 @@ public class SyncTaskExecutionController {
 	private final SyncTaskExecutionService executionService;
 	private final SyncTaskExecutionFileService executionFileService;
 
-	@Operation(summary = "根据作业ID查询执行记录详情（包含文件信息）")
-	@GetMapping("job/{jobId}")
-	public Result<TaskExecutionDetailVO> getByJobId(@PathVariable String jobId) {
-		TaskExecutionDetailVO detail = executionService.getExecutionDetailByJobId(jobId);
-		return Result.ok(detail);
-	}
-
 	@Operation(summary = "根据任务ID查询执行历史记录列表")
 	@GetMapping("task/{taskId}/history")
 	public Result<List<TaskExecutionDetailVO>> getHistoryByTaskId(@PathVariable Long taskId) {

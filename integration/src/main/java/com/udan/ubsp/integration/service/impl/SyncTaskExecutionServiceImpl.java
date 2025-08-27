@@ -31,37 +31,6 @@ public class SyncTaskExecutionServiceImpl extends ServiceImpl<SyncTaskExecutionM
 	}
 
 	@Override
-	public TaskExecutionDetailVO getExecutionDetailByJobId(String jobId) {
-		// 1. 查询执行记录
-		SyncTaskExecutionEntity execution = this.baseMapper.selectByJobId(jobId);
-		if (execution == null) {
-			return null;
-		}
-
-		// 2. 使用 MapStruct 转换为详情VO
-		TaskExecutionDetailVO detailVO = convert.toDetailVO(execution);
-
-		// 3. 查询关联的文件信息
-		try {
-			Long jobIdLong = Long.valueOf(jobId);
-			LambdaQueryWrapper<SyncTaskExecutionFileEntity> queryWrapper = new LambdaQueryWrapper<>();
-			queryWrapper.eq(SyncTaskExecutionFileEntity::getSeaTunnelJobId, jobIdLong)
-					.orderByDesc(SyncTaskExecutionFileEntity::getCreateTime);
-			
-			List<SyncTaskExecutionFileEntity> fileEntities = executionFileService.list(queryWrapper);
-			
-			// 4. 使用 MapStruct 转换为文件VO列表
-			List<TaskExecutionDetailVO.ExecutionFileVO> fileVOs = convert.toFileVOList(fileEntities);
-			detailVO.setFiles(fileVOs);
-		} catch (NumberFormatException e) {
-			// jobId 不是有效的 Long 值，设置空列表
-			detailVO.setFiles(List.of());
-		}
-
-		return detailVO;
-	}
-
-	@Override
 	public List<TaskExecutionDetailVO> getExecutionHistoryByTaskId(Long taskId) {
 		// 1. 查询该任务的所有执行记录
 		LambdaQueryWrapper<SyncTaskExecutionEntity> queryWrapper = new LambdaQueryWrapper<>();

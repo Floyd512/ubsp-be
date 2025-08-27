@@ -16,11 +16,6 @@ public interface SyncTaskExecutionService extends IService<SyncTaskExecutionEnti
 	SyncTaskExecutionEntity getByJobId(String jobId);
 
 	/**
-	 * 根据 SeaTunnel 作业ID 查询执行记录详情（包含文件信息）
-	 */
-	TaskExecutionDetailVO getExecutionDetailByJobId(String jobId);
-
-	/**
 	 * 根据任务ID查询执行历史记录列表
 	 */
 	List<TaskExecutionDetailVO> getExecutionHistoryByTaskId(Long taskId);
