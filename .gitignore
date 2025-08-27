@@ -32,3 +32,5 @@ build/
 .vscode/
 
 .idea/*.xml
+
+!.idea/icon.png
