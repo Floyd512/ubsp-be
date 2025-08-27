@@ -30,6 +30,7 @@ seatunnel:
     # Token认证配置（当auth-type为bearer/token/custom时使用）
     # token: your-token
     # auth-header: Authorization  # 自定义认证头名称（仅当auth-type为custom时使用）
+    output-root: F:\tmp
 
 # 日志配置
 logging:

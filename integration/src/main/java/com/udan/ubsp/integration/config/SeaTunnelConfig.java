@@ -42,4 +42,9 @@ public class SeaTunnelConfig {
      * 自定义认证头名称
      */
     private String authHeader = "Authorization";
+
+    /**
+     * 同步文件目标父路径
+     */
+    private String outputRoot;
 }
