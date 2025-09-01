@@ -16,22 +16,25 @@ spring:
       host: prod-redis-server
       port: 6379
       database: 0
-      password: ${REDIS_PASSWORD} # 生产环境建议使用环境变量
+      password: # 如果有密码则填写 ${REDIS_PASSWORD}  生产环境建议使用环境变量
 
 # SeaTunnel 配置
 seatunnel:
   api:
-    base-url: ${SEATUNNEL_API_BASE_URL:http://seatunnel-server:8082}
+    # http://seatunnel-server:8082
+    base-url: ${SEATUNNEL_API_BASE_URL:}
     # 认证方式: none, basic, bearer, token, custom
-    auth-type: ${SEATUNNEL_AUTH_TYPE:none}
+    auth-type: basic
     # Basic认证配置
     username: ${SEATUNNEL_USERNAME:}
     password: ${SEATUNNEL_PASSWORD:}
     # Token认证配置
-    token: ${SEATUNNEL_TOKEN:}
-    auth-header: ${SEATUNNEL_AUTH_HEADER:Authorization}
+    # token:
+    # 自定义认证头名称（仅当auth-type为custom时使用）
+    # auth-header: Authorization
+    output-root: /tmp/seatunnel_output
 
-# 生产环境日志配置
+# 日志配置
 logging:
   level:
     com.udan.ubsp: info
@@ -39,4 +42,4 @@ logging:
   pattern:
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file:
-    name: logs/ubsp-be.log
+    name: /home/uduser/ubsp-be/logs/ubsp-be.log

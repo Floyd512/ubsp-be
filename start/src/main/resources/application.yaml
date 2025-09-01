@@ -6,7 +6,7 @@ server:
 spring:
   # 激活的环境配置文件 (根据不同电脑修改此处)
   profiles:
-    active: dev_work  # 可选: dev_home, dev_work, prod
+    active: dev  # 可选: dev, test, prod
 
   # 数据源配置 - 移动到各环境配置文件中
   datasource:
@@ -22,11 +22,6 @@ spring:
 
   jackson:
     time-zone: GMT+8
-
-#用于打印框架生成的sql语句，便于调试
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
 springdoc:
