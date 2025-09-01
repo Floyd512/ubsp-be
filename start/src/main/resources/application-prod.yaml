@@ -32,7 +32,7 @@ seatunnel:
     # token:
     # 自定义认证头名称（仅当auth-type为custom时使用）
     # auth-header: Authorization
-    output-root: /tmp/seatunnel_output
+    output-root: /tmp/seatunnel/output
 
 # 日志配置
 logging:
