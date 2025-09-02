@@ -6,7 +6,7 @@ server:
 spring:
   # 激活的环境配置文件 (根据不同电脑修改此处)
   profiles:
-    active: dev  # 可选: dev, test, prod
+    active: prod  # 可选: dev, test, prod
 
   # 数据源配置 - 移动到各环境配置文件中
   datasource:
