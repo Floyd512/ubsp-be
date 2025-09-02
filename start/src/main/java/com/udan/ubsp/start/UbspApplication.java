@@ -1,10 +1,11 @@
-package com.udan;
+package com.udan.ubsp.start;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
  * @Date 2025-06-30 23:12:57
  */
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.udan.ubsp"})
 @EnableScheduling
 public class UbspApplication {
     public static void main(String[] args) {

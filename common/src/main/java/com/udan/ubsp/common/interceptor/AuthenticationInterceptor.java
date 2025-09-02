@@ -4,6 +4,7 @@ import com.udan.ubsp.common.exception.UBSPException;
 import com.udan.ubsp.common.enums.ResultCodeEnum;
 import com.udan.ubsp.common.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -21,7 +22,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     public static final String USER_ID_ATTR = "CURRENT_USER_ID";
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) {
         // 放行OPTIONS预检请求，解决跨域问题
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             return true;
