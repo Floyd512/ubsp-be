@@ -13,7 +13,7 @@ spring:
   # Redis配置  
   data:
     redis:
-      host: prod-redis-server
+      host: ${REDIS_SERVER}
       port: 6379
       database: 0
       password: # 如果有密码则填写 ${REDIS_PASSWORD}  生产环境建议使用环境变量
